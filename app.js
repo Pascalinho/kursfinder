@@ -1,13 +1,16 @@
 document.addEventListener("DOMContentLoaded", function() {
     const coursesData = [
-        { name: "Introduction to Programming", category: "Programming", difficulty: "Beginner", startDate: "2024-03-01", length: 30, isFree: true },
-        { name: "Advanced JavaScript", category: "Programming", difficulty: "Advanced", startDate: "2024-04-15", length: 45, isFree: false },
-        { name: "Design Basics", category: "Design", difficulty: "Beginner", startDate: "2024-05-20", length: 30, isFree: true },
-        { name: "UX Design Principles", category: "Design", difficulty: "Intermediate", startDate: "2024-06-10", length: 40, isFree: false },
-        { name: "Data Structures in C", category: "Computer Science", difficulty: "Advanced", startDate: "2024-07-05", length: 60, isFree: false },
-        { name: "Database Fundamentals", category: "Computer Science", difficulty: "Beginner", startDate: "2024-08-01", length: 30, isFree: true },
-        // Additional courses can be added here
+        { name: "Einführung in die Programmierung", category: "Programmierung", difficulty: "Anfänger", startDate: "01.03.2024", length: 30, isFree: true },
+        { name: "Fortgeschrittenes JavaScript", category: "Programmierung", difficulty: "Erfahren", startDate: "15.04.2024", length: 45, isFree: false },
+        { name: "Grundlagen des Designs", category: "Design", difficulty: "Anfänger", startDate: "20.05.2024", length: 30, isFree: true },
+        { name: "Prinzipien des UX-Designs", category: "Design", difficulty: "Erfahren", startDate: "10.06.2024", length: 40, isFree: false },
+        { name: "Datenstrukturen in C", category: "Informatik", difficulty: "Erfahren", startDate: "05.07.2024", length: 60, isFree: false },
+        { name: "Datenbankgrundlagen", category: "Informatik", difficulty: "Anfänger", startDate: "01.08.2024", length: 30, isFree: true },
+        { name: "Grundkurs Fotografie", category: "Kunst", difficulty: "Anfänger", startDate: "15.08.2024", length: 45, isFree: true },
+        { name: "Moderne Webentwicklung", category: "Webentwicklung", difficulty: "Erfahren", startDate: "01.09.2024", length: 50, isFree: false },
+        // Add more courses as needed
     ];
+
 
     function displayCourses(courses) {
         const container = document.getElementById('coursesContainer');
