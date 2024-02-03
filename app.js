@@ -54,3 +54,4 @@ document.getElementById('filterIsFree').addEventListener('change', filterCourses
 // Initial display of courses
 displayCourses(coursesData);
 
+});
