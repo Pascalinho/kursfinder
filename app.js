@@ -8,50 +8,54 @@ document.addEventListener("DOMContentLoaded", function() {
         { name: "Datenbankgrundlagen", category: "Informatik", difficulty: "Anfänger", startDate: "01.08.2024", length: 30, isFree: true },
         { name: "Grundkurs Fotografie", category: "Kunst", difficulty: "Anfänger", startDate: "15.08.2024", length: 45, isFree: true },
         { name: "Moderne Webentwicklung", category: "Webentwicklung", difficulty: "Erfahren", startDate: "01.09.2024", length: 50, isFree: false },
-        // Add more courses as needed
     ];
-
 
     function displayCourses(courses) {
         const container = document.getElementById('coursesContainer');
-        container.innerHTML = ''; // Clear previous content
+        container.innerHTML = '';
         courses.forEach(course => {
             const element = document.createElement('div');
             element.classList.add('course-card');
             element.innerHTML = `
-    <h2>${course.name}</h2>
-    <p>Kategorie: ${course.category}</p>
-    <p>Schwierigkeit: ${course.difficulty}</p>
-    <p>Start: ${course.startDate}</p>
-    <p>Dauer: ${course.length} Tage</p>
-    <p>Typ: ${course.isFree ? 'Kostenlos' : 'Kostenpflichtig'}</p>
-`;
-
+                <h2>${course.name}</h2>
+                <p>Kategorie: ${course.category}</p>
+                <p>Schwierigkeit: ${course.difficulty}</p>
+                <p>Start: ${course.startDate}</p>
+                <p>Dauer: ${course.length} Tage</p>
+                <p>Typ: ${course.isFree ? 'Kostenlos' : 'Kostenpflichtig'}</p>
+            `;
             container.appendChild(element);
         });
     }
 
-function filterCourses() {
-    const searchQuery = document.getElementById('searchQuery').value.toLowerCase();
-    const filterCategory = document.getElementById('filterCategory').value;
-    const filterDifficulty = document.getElementById('filterDifficulty').value;
-    const filterIsFree = document.getElementById('filterIsFree').value;
+    function filterCourses() {
+        const searchQuery = document.getElementById('searchQuery').value.toLowerCase();
+        const filterCategory = document.getElementById('filterCategory').value;
+        const filterDifficulty = document.getElementById('filterDifficulty').value;
+        const filterIsFree = document.getElementById('filterIsFree').value;
 
-    const filteredCourses = coursesData.filter(course => {
-        return (course.name.toLowerCase().includes(searchQuery) || !searchQuery) &&
-               (course.category === filterCategory || !filterCategory) &&
-               (course.difficulty === filterDifficulty || !filterDifficulty) &&
-               (filterIsFree ? (filterIsFree === 'true' ? course.isFree : !course.isFree) : true);
-    });
-    displayCourses(filteredCourses);
-}
+        const filteredCourses = coursesData.filter(course => {
+            return (course.name.toLowerCase().includes(searchQuery) || !searchQuery) &&
+                   (course.category === filterCategory || !filterCategory) &&
+                   (course.difficulty === filterDifficulty || !filterDifficulty) &&
+                   (filterIsFree ? (filterIsFree === 'true' ? course.isFree : !course.isFree) : true);
+        });
+        displayCourses(filteredCourses);
+    }
 
-document.getElementById('searchQuery').addEventListener('input', filterCourses);
-document.getElementById('filterCategory').addEventListener('change', filterCourses);
-document.getElementById('filterDifficulty').addEventListener('change', filterCourses);
-document.getElementById('filterIsFree').addEventListener('change', filterCourses);
+    function resetFilters() {
+        document.getElementById('searchQuery').value = '';
+        document.getElementById('filterCategory').selectedIndex = 0;
+        document.getElementById('filterDifficulty').selectedIndex = 0;
+        document.getElementById('filterIsFree').selectedIndex = 0;
+        displayCourses(coursesData);
+    }
 
-// Initial display of courses
-displayCourses(coursesData);
+    document.getElementById('searchQuery').addEventListener('input', filterCourses);
+    document.getElementById('filterCategory').addEventListener('change', filterCourses);
+    document.getElementById('filterDifficulty').addEventListener('change', filterCourses);
+    document.getElementById('filterIsFree').addEventListener('change', filterCourses);
+    document.getElementById('resetButton').addEventListener('click', resetFilters);
 
+    displayCourses(coursesData);
 });
