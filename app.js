@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const container = document.getElementById('coursesContainer');
         container.innerHTML = ''; // Clear previous content
         if (courses.length === 0) {
-            container.innerHTML = `<div class="no-results">Keine Kurse gefunden, die den Kriterien entsprechen.</div>`;
+            container.innerHTML = `<div class="no-results">Keine Kurse gefunden, die ihren Kriterien entsprechen.</div>`;
         } else {
             courses.forEach(course => {
                 const element = document.createElement('div');
