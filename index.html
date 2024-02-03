@@ -1,24 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Finder Demo</title>
+    <title>Kursfinder Demo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Course Finder</h1>
-        <input type="text" id="searchQuery" placeholder="Search courses...">
+        <h1>Kursfinder</h1>
+        <input type="text" id="searchQuery" placeholder="Kurse suchen...">
         <select id="filterCategory">
-            <option value="">Select Category</option>
-            <option value="Programming">Programming</option>
+            <option value="">Kategorie auswählen</option>
+            <option value="Programmierung">Programmierung</option>
             <option value="Design">Design</option>
+            <option value="Informatik">Informatik</option>
+            <option value="Kunst">Kunst</option>
+            <option value="Webentwicklung">Webentwicklung</option>
+        </select>
+        <select id="filterDifficulty">
+            <option value="">Schwierigkeit auswählen</option>
+            <option value="Anfänger">Anfänger</option>
+            <option value="Erfahren">Erfahren</option>
         </select>
         <select id="filterIsFree">
-            <option value="">All Courses</option>
-            <option value="true">Free</option>
-            <option value="false">Paid</option>
+            <option value="">Alle Kurse</option>
+            <option value="true">Kostenlos</option>
+            <option value="false">Kostenpflichtig</option>
         </select>
         <div id="coursesContainer"></div>
     </div>
