@@ -20,11 +20,11 @@ document.addEventListener("DOMContentLoaded", function() {
             element.classList.add('course-card');
             element.innerHTML = `
                 <h2>${course.name}</h2>
-                <p>Category: ${course.category}</p>
-                <p>Difficulty: ${course.difficulty}</p>
-                <p>Start Date: ${course.startDate}</p>
-                <p>Length: ${course.length} days</p>
-                <p>Type: ${course.isFree ? 'Free' : 'Paid'}</p>
+                <p>Kategorie: ${course.category}</p>
+                <p>Schwierigkeit: ${course.difficulty}</p>
+                <p>Start: ${course.startDate}</p>
+                <p>Dauer: ${course.length} days</p>
+                <p>Typ: ${course.isFree ? 'Free' : 'Paid'}</p>
             `;
             container.appendChild(element);
         });
