@@ -12,20 +12,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function displayCourses(courses) {
         const container = document.getElementById('coursesContainer');
-        container.innerHTML = '';
-        courses.forEach(course => {
-            const element = document.createElement('div');
-            element.classList.add('course-card');
-            element.innerHTML = `
-                <h2>${course.name}</h2>
-                <p>Kategorie: ${course.category}</p>
-                <p>Schwierigkeit: ${course.difficulty}</p>
-                <p>Start: ${course.startDate}</p>
-                <p>Dauer: ${course.length} Tage</p>
-                <p>Typ: ${course.isFree ? 'Kostenlos' : 'Kostenpflichtig'}</p>
-            `;
-            container.appendChild(element);
-        });
+        container.innerHTML = ''; // Clear previous content
+        if (courses.length === 0) {
+            container.innerHTML = `<div class="no-results">Keine Kurse gefunden, die den Kriterien entsprechen.</div>`;
+        } else {
+            courses.forEach(course => {
+                const element = document.createElement('div');
+                element.classList.add('course-card');
+                element.innerHTML = `
+                    <h2>${course.name}</h2>
+                    <p>Kategorie: ${course.category}</p>
+                    <p>Schwierigkeit: ${course.difficulty}</p>
+                    <p>Start: ${course.startDate}</p>
+                    <p>Dauer: ${course.length} Tage</p>
+                    <p>Typ: ${course.isFree ? 'Kostenlos' : 'Kostenpflichtig'}</p>
+                `;
+                container.appendChild(element);
+            });
+        }
     }
 
     function filterCourses() {
