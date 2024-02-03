@@ -30,26 +30,26 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function filterCourses() {
-        const searchQuery = document.getElementById('searchQuery').value.toLowerCase();
-        const filterCategory = document.getElementById('filterCategory').value;
-        const filterIsFree = document.getElementById('filterIsFree').value;
+function filterCourses() {
+    const searchQuery = document.getElementById('searchQuery').value.toLowerCase();
+    const filterCategory = document.getElementById('filterCategory').value;
+    const filterDifficulty = document.getElementById('filterDifficulty').value;
+    const filterIsFree = document.getElementById('filterIsFree').value;
 
-        const filteredCourses = coursesData.filter(course => {
-            const isFreeMatch = filterIsFree ? (filterIsFree === 'true' ? course.isFree : !course.isFree) : true;
+    const filteredCourses = coursesData.filter(course => {
+        return (course.name.toLowerCase().includes(searchQuery) || !searchQuery) &&
+               (course.category === filterCategory || !filterCategory) &&
+               (course.difficulty === filterDifficulty || !filterDifficulty) &&
+               (filterIsFree ? (filterIsFree === 'true' ? course.isFree : !course.isFree) : true);
+    });
+    displayCourses(filteredCourses);
+}
 
-            return (course.name.toLowerCase().includes(searchQuery) || !searchQuery) &&
-                   (course.category === filterCategory || !filterCategory) &&
-                   isFreeMatch;
-        });
-        displayCourses(filteredCourses);
-    }
+document.getElementById('searchQuery').addEventListener('input', filterCourses);
+document.getElementById('filterCategory').addEventListener('change', filterCourses);
+document.getElementById('filterDifficulty').addEventListener('change', filterCourses);
+document.getElementById('filterIsFree').addEventListener('change', filterCourses);
 
-    // Attaching event listeners for the search query, category, and free/paid filters
-    document.getElementById('searchQuery').addEventListener('input', filterCourses);
-    document.getElementById('filterCategory').addEventListener('change', filterCourses);
-    document.getElementById('filterIsFree').addEventListener('change', filterCourses);
+// Initial display of courses
+displayCourses(coursesData);
 
-    // Initial display of all courses
-    displayCourses(coursesData);
-});
