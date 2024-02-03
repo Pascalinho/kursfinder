@@ -46,8 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
     displayCourses(filteredCourses);
 }
 
-document.getElementById('filterStartDate').addEventListener('change', filterCourses);
-document.getElementById('filterLength').addEventListener('input', filterCourses);
+
 document.getElementById('filterIsFree').addEventListener('change', filterCourses);
 
 // Initial display of courses
