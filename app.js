@@ -10,20 +10,23 @@ document.addEventListener("DOMContentLoaded", function() {
     ];
 
     function displayCourses(courses) {
-        const container = document.getElementById('coursesContainer');
-        container.innerHTML = ''; // Clear previous content
-        courses.forEach(course => {
-            const element = document.createElement('div');
-            element.classList.add('course-card');
-            element.innerHTML = `<h2>${course.name}</h2>
-                                 <p>Category: ${course.category}</p>
-                                 <p>Difficulty: ${course.difficulty}</p>
-                                 <p>Start Date: ${course.startDate}</p>
-                                 <p>Length: ${course.length} days</p>
-                                 <p>Type: ${course.isFree ? 'Free' : 'Paid'}</p>`;
-            container.appendChild(element);
-        });
-    }
+    const container = document.getElementById('coursesContainer');
+    container.innerHTML = ''; // Clear previous content
+    courses.forEach(course => {
+        const element = document.createElement('div');
+        element.classList.add('course-card');
+        element.innerHTML = `
+            <h2>${course.name}</h2>
+            <p>Category: ${course.category}</p>
+            <p>Difficulty: ${course.difficulty}</p>
+            <p>Start Date: ${course.startDate}</p>
+            <p>Length: ${course.length} days</p>
+            <p>Type: ${course.isFree ? 'Free' : 'Paid'}</p>
+        `;
+        container.appendChild(element);
+    });
+}
+
 
   function filterCourses() {
     const searchQuery = document.getElementById('searchQuery').value.toLowerCase();
