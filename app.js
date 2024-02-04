@@ -20,18 +20,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 const element = document.createElement('div');
                 element.classList.add('course-card');
                 element.innerHTML = `
-                    <h2><a href="${course.detailPageUrl}" target="_blank">${course.name}</a></h2>
+                    <h2>${course.name}</h2>
                     <p>Kategorie: ${course.category}</p>
                     <p>Schwierigkeit: ${course.difficulty}</p>
                     <p>Start: ${course.startDate}</p>
                     <p>Dauer: ${course.length} Tage</p>
                     <p>Typ: ${course.isFree ? 'Kostenlos' : 'Kostenpflichtig'}</p>
-                    ${course.flyerLink ? `<a href="${course.flyerLink}" target="_blank">Kursflyer</a>` : ''}
+                    <button onclick="location.href='${course.detailPageUrl}'">Details</button>
+                    ${course.flyerLink ? `<a href="${course.flyerLink}" target="_blank" class="flyer-link">Kursflyer</a>` : ''}
                 `;
                 container.appendChild(element);
             });
         }
     }
+    
     
 
     function filterCourses() {
