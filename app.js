@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
         { name: "Datenstrukturen in C", category: "Informatik", difficulty: "Erfahren", startDate: "05.07.2024", length: 60, isFree: false },
         { name: "Datenbankgrundlagen", category: "Informatik", difficulty: "Anfänger", startDate: "01.08.2024", length: 30, isFree: true },
         { name: "Grundkurs Fotografie", category: "Kunst", difficulty: "Anfänger", startDate: "15.08.2024", length: 45, isFree: true },
-        { name: "Moderne Webentwicklung", category: "Webentwicklung", difficulty: "Erfahren", startDate: "01.09.2024", length: 50, isFree: false },
+        { name: "Moderne Webentwicklung2", category: "Webentwicklung", difficulty: "Erfahren", startDate: "01.09.2024", length: 50, isFree: false },
     ];
 
     function displayCourses(courses) {
