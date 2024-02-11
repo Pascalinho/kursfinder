@@ -138,3 +138,19 @@ button:hover {
     margin-bottom:1em;
     margin-top:1em;
 }
+
+@media (max-width: 768px) {
+    .container1 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-menu, .search-icon {
+        margin-top: 10px; /* Add some space between items */
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
