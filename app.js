@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
     ];
 
     const locationImages = {
-        "Kiel": "kiel.png",
-        "Rendsburg": "rendsburg.png",
+        "Kiel": "/kiel.png",
+        "Rendsburg": "/rendsburg.png",
         // Add paths for other location images
     };
     const locationTexts = {
