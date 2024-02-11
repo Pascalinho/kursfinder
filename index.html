@@ -5,11 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kursfinder Demo</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 <body>
+    <div class="container1">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="/">
+                <img src="log.png" alt="Your Logo" style="height: 50px;"> <!-- Adjust the path and size as needed -->
+            </a>
+        </div>
+    
+        <!-- Navigation Menu -->
+        <nav class="main-navigation">
+            <ul class="nav-menu">
+                <li><a href="https://www.tertia.de/standort-suche/">Standortsuche</a></li>
+                <li><a href="https://www.tertia.de/unsere-angebote/">Unsere Angebote</a></li>
+                <li><a href="https://www.tertia.de/neuigkeiten/">Neuigkeiten</a></li>
+                <li><a href="https://www.tertia.de/ueber-tertia/">Über TERTIA</a></li>
+                <li><a href="https://www.tertia.de/jobs/">Stellenangebote</a></li>
+            </ul>
+        </nav>
+    
+        <!-- Search Icon -->
+        <div class="search-icon">
+            <a href="https://www.tertia.de/suche/">
+                <i class="fas fa-search"></i>
+            </a>
+        </div>
+    </div>
     <div class="container">
-        <h1>Kursfinder</h1>
+                <img id="locationImage" src="tertia.jpg" alt="Standort" style="max-width: 100%; height: auto;">
+        <div id="locationText">Herzlich willkommen bei TERTIA</div>
+        
         <input type="text" id="searchQuery" placeholder="Kurse suchen...">
+        <select id="filterLocation">
+            <option value="">Standort auswählen</option>
+            <option value="Kiel">Kiel</option>
+            <option value="Rendsburg">Rendsburg</option>
+            
+        </select>
         <select id="filterCategory">
             <option value="">Kategorie auswählen</option>
             <option value="Programmierung">Programmierung</option>

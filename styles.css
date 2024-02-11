@@ -1,3 +1,8 @@
+html {
+    overflow-y: scroll;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     color: #333;
@@ -7,12 +12,38 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1080px;
     margin: 20px auto;
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+.container1 {
+    max-width: 1080px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.logo img {
+    height: 50px; /* Adjust based on your logo's size */
+    width: auto; /* Maintain aspect ratio */
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px; /* Adjust the space between menu items */
+}
+
+/* Remaining CSS from the previous example */
+
 
 h1 {
     color: #0056b3;
@@ -99,4 +130,11 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+#locationText {
+    text-align:center;
+    font-size:30px;
+    margin-bottom:1em;
+    margin-top:1em;
 }
