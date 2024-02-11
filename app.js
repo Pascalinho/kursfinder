@@ -1,13 +1,14 @@
 document.addEventListener("DOMContentLoaded", function() {
     const coursesData = [
-        { name: "Einführung in die Programmierung", category: "Programmierung", difficulty: "Anfänger", startDate: "01.03.2024", length: 30, isFree: true, detailPageUrl: "p1.html", flyerLink: "fp1.pdf", location: "Kiel" },
-        { name: "Fortgeschrittenes JavaScript", category: "Programmierung", difficulty: "Erfahren", startDate: "15.04.2024", length: 45, isFree: false, detailPageUrl: "p2.html", flyerLink: "fp2.pdf", location: "Rendsburg" },
-        // Add more courses with 'location' property
+        { name: "Ausbildung der Ausbilder – AdA", category: "Weiterbildung", difficulty: "Anfänger", startDate: "01.03.2024", length: "21 Werktage", isFree: true, detailPageUrl: "https://www.tertia.de/massnahmen/ausbildung-der-ausbilder-ada-46/", flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_TOBi_AEVO_Kiel.pdf", location: "Kiel" },
+        { name: "Beruf und Sprache", category: "Coaching", difficulty: "Erfahren", startDate: "15.04.2024", length: "210 UE", isFree: false, detailPageUrl: "https://www.tertia.de/massnahmen/beruf-und-sprache-18/", flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_AVGS_Beruf_und_Sprache_Kiel.pdf", location: "Kiel" },
+        { name: "Fit for Job: Arbeit und Gesundheit", category: "Coaching", difficulty: "Erfahren", startDate: "15.04.2024", length: "nach Absprache", isFree: false, detailPageUrl: "https://www.tertia.de/massnahmen/gesundheitscoaching-17/", flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_AVGS_Gesundheitscoaching_Kiel.pdf", location: "Kiel" },
+       
     ];
 
     const locationImages = {
-        "Kiel": "kiel.png",
-        "Rendsburg": "rendsburg.png",
+        "Kiel": "Kiel.png",
+        "Rendsburg": "Rendsburg.png",
         // Add paths for other location images
     };
     const locationTexts = {
@@ -27,12 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 element.classList.add('course-card');
                 element.innerHTML = `
                     <h2>${course.name}</h2>
-                    <p>Kategorie: ${course.category}</p>
-                    <p>Schwierigkeit: ${course.difficulty}</p>
                     <p>Start: ${course.startDate}</p>
-                    <p>Dauer: ${course.length} Tage</p>
+                    <p>Dauer: ${course.length}</p>
                     <p>Typ: ${course.isFree ? 'Kostenlos' : 'Kostenpflichtig'}</p>
-                    <button onclick="location.href='${course.detailPageUrl}'">Details</button>
+                    <button onclick="window.open('${course.detailPageUrl}', '_blank')">Details</button>
                     ${course.flyerLink ? `<a href="${course.flyerLink}" target="_blank" class="flyer-link">Kursflyer</a>` : ''}
                 `;
                 container.appendChild(element);
