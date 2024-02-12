@@ -39,30 +39,33 @@
                 <img id="locationImage" src="tertia.jpg" alt="Standort" style="max-width: 100%; height: auto;">
         <div id="locationText">Herzlich willkommen bei TERTIA</div>
         
-        <input type="text" id="searchQuery" placeholder="Kurse suchen...">
-        <select id="filterLocation">
-            <option value="">Standort auswählen</option>
-            <option value="Kiel">Kiel</option>
-            <option value="Rendsburg">Rendsburg</option>
-            
-        </select>
-        <select id="filterCategory">
-            <option value="">Art der Maßnahme</option>
-            <option value="Coaching">Coaching</option>
-            <option value="Weiterbildung">Weiterbildung</option>
-            <option value="Rehabilitation und Integration">Rehabilitation und Integration</option>
+        
+        <div class="filter-container">
+            <input type="text" id="searchQuery" placeholder="Kurse suchen...">
+            <select id="filterLocation">
+                <option value="">Standort auswählen</option>
+                <option value="Kiel">Kiel</option>
+                <option value="Rendsburg">Rendsburg</option>
             </select>
-        <select id="filterDifficulty">
-            <option value="">Schwierigkeit auswählen</option>
-            <option value="Anfänger">Anfänger</option>
-            <option value="Erfahren">Erfahren</option>
-        </select>
-        <select id="filterIsFree">
-            <option value="">Alle Kurse</option>
-            <option value="true">Kostenlos</option>
-            <option value="false">Kostenpflichtig</option>
-        </select>
-        <button id="resetButton">Auswahl zurücksetzen</button>
+            <select id="filterCategory">
+                <option value="">Art der Maßnahme</option>
+                <option value="Coaching">Coaching</option>
+                <option value="Weiterbildung">Weiterbildung</option>
+                <option value="Rehabilitation und Integration">Rehabilitation und Integration</option>
+            </select>
+            <select id="filterDifficulty">
+                <option value="">Schwierigkeit auswählen</option>
+                <option value="Anfänger">Anfänger</option>
+                <option value="Erfahren">Erfahren</option>
+            </select>
+            <select id="filterIsFree">
+                <option value="">Alle Kurse</option>
+                <option value="true">Kostenlos</option>
+                <option value="false">Kostenpflichtig</option>
+            </select>
+            <button id="resetButton">Auswahl zurücksetzen</button>
+        </div>
+        
         <div id="coursesContainer"></div>
     </div>
     <script src="app.js"></script>

@@ -51,25 +51,38 @@ h1 {
     text-align: center;
 }
 
-.course-card {
-    border-bottom: 1px solid #eee;
-    padding: 15px;
-    margin-bottom: 10px;
+#coursesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Creates columns that best fit the container width */
+    gap: 30px; /* Adjust the space between cards */
 }
 
-.course-card:last-child {
-    border-bottom: none;
+.course-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
 }
+
 
 .course-card h2 {
-    color: #0056b3;
-    font-size: 20px;
     margin-top: 0;
+    margin-bottom: 5px; /* Reduce bottom margin of title for compactness */
+    font-size: 18px; /* Optional: Adjust title font size for compactness */
 }
 
 .course-card p {
-    margin: 5px 0;
+    margin: 0; /* Remove default paragraph margins for a tighter look */
+    font-size: 14px; /* Optional: Adjust text size for compactness */
 }
+
+/* Adjustments for button and flyer link within course cards for consistency */
+.course-card button,
+.course-card .flyer-link {
+    padding: 5px 10px; /* Reduce padding for a more compact button */
+    font-size: 12px; /* Reduce font size for compactness */
+    margin-top: 5px; /* Ensure some space above buttons/links */
+}
+
 
 .course-card a {
     display: inline-block;
@@ -138,6 +151,38 @@ button:hover {
     margin-bottom:1em;
     margin-top:1em;
 }
+
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-container input[type="text"],
+.filter-container select {
+    flex: 1; /* Allows items to grow and fill the space */
+    min-width: 120px; /* Minimum width before wrapping */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#resetButton {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: auto; /* This pushes the reset button to the right */
+}
+
+#resetButton:hover {
+    background-color: #0056b3;
+}
+
+
 
 @media (max-width: 768px) {
     .container1 {
