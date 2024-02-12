@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     const coursesData = [
-        { name: "Ausbildung der Ausbilder – AdA", category: "Weiterbildung", difficulty: "Anfänger", startDate: "01.03.2024", length: "21 Werktage", isFree: true, detailPageUrl: "https://www.tertia.de/massnahmen/ausbildung-der-ausbilder-ada-46/", flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_TOBi_AEVO_Kiel.pdf", location: "Kiel" },
-        { name: "Beruf und Sprache", category: "Coaching", difficulty: "Erfahren", startDate: "15.04.2024", length: "210 UE", isFree: false, detailPageUrl: "https://www.tertia.de/massnahmen/beruf-und-sprache-18/", flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_AVGS_Beruf_und_Sprache_Kiel.pdf", location: "Kiel" },
-        { name: "Fit for Job: Arbeit und Gesundheit", category: "Coaching", difficulty: "Erfahren", startDate: "15.04.2024", length: "nach Absprache", isFree: false, detailPageUrl: "https://www.tertia.de/massnahmen/gesundheitscoaching-17/", flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_AVGS_Gesundheitscoaching_Kiel.pdf", location: "Kiel" },
+        { name: "Ausbildung der Ausbilder – AdA", category: "Weiterbildung", difficulty: "Berufsübergreifend", startDate: "01.03.2024", length: "21 Werktage", isFree: true, detailPageUrl: "https://www.tertia.de/massnahmen/ausbildung-der-ausbilder-ada-46/", flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_TOBi_AEVO_Kiel.pdf", location: "Kiel", zielgruppe:"Arbeitssuchende" },
+        { name: "Beruf und Sprache", category: "Coaching", difficulty: "Berufsübergreifend", startDate: "15.04.2024", length: "210 UE", isFree: false, detailPageUrl: "https://www.tertia.de/massnahmen/beruf-und-sprache-18/", flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_AVGS_Beruf_und_Sprache_Kiel.pdf", location: "Kiel", zielgruppe:"Migranten" },
+        { name: "Fit for Job: Arbeit und Gesundheit", category: "Coaching", difficulty: "Berufsübergreifend", startDate: "15.04.2024", length: "nach Absprache", isFree: false, detailPageUrl: "https://www.tertia.de/massnahmen/gesundheitscoaching-17/", flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_AVGS_Gesundheitscoaching_Kiel.pdf", location: "Kiel", zielgruppe:"Arbeitssuchende" },
        
     ];
 
@@ -46,23 +46,33 @@ document.addEventListener("DOMContentLoaded", function() {
         const filterDifficulty = document.getElementById('filterDifficulty').value;
         const filterIsFree = document.getElementById('filterIsFree').value;
         const filterLocation = document.getElementById('filterLocation').value;
-
+        const filterZielgruppe = document.getElementById('filterZielgruppe').value;
+        const filterStartDate = document.getElementById('filterStartDate').value;
+    
         const filteredCourses = coursesData.filter(course => {
-            return (course.name.toLowerCase().includes(searchQuery) || !searchQuery) &&
-                   (course.category === filterCategory || !filterCategory) &&
-                   (course.difficulty === filterDifficulty || !filterDifficulty) &&
-                   (filterIsFree ? (filterIsFree === 'true' ? course.isFree : !course.isFree) : true) &&
-                   (course.location === filterLocation || !filterLocation);
+            const courseStartDate = new Date(course.startDate.split(".").reverse().join("-"));
+            const selectedStartDate = new Date(filterStartDate);
+    
+            return (!searchQuery || course.name.toLowerCase().includes(searchQuery)) &&
+                   (!filterCategory || course.category === filterCategory) &&
+                   (!filterDifficulty || course.difficulty === filterDifficulty) &&
+                   (filterIsFree === "" || course.isFree === (filterIsFree === "true")) &&
+                   (!filterZielgruppe || course.zielgruppe === filterZielgruppe) &&
+                   (!filterLocation || course.location === filterLocation) &&
+                   (!filterStartDate || courseStartDate >= selectedStartDate); // Correctly integrated into the chain
         });
         displayCourses(filteredCourses);
     }
+    
 
     function resetFilters() {
         document.getElementById('searchQuery').value = '';
         document.getElementById('filterCategory').selectedIndex = 0;
         document.getElementById('filterDifficulty').selectedIndex = 0;
         document.getElementById('filterIsFree').selectedIndex = 0;
-        document.getElementById('filterLocation').selectedIndex = 0; // Ensure location filter is also reset
+        document.getElementById('filterLocation').selectedIndex = 0;
+        document.getElementById('filterZielgruppe').selectedIndex = 0;
+        document.getElementById('filterStartDate').value = '';
         filterCourses(); // Reapply filters to reset courses display
     }
 
@@ -70,6 +80,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('filterCategory').addEventListener('change', filterCourses);
     document.getElementById('filterDifficulty').addEventListener('change', filterCourses);
     document.getElementById('filterIsFree').addEventListener('change', filterCourses);
+    document.getElementById('filterZielgruppe').addEventListener('change', filterCourses);
+    document.getElementById('filterStartDate').addEventListener('change', filterCourses);
     document.getElementById('filterLocation').addEventListener('change', function() {
         filterCourses(); // Reapply filters with new location
         updateLocationImage(); // Update the location image based on the new selection

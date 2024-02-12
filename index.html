@@ -47,22 +47,35 @@
                 <option value="Kiel">Kiel</option>
                 <option value="Rendsburg">Rendsburg</option>
             </select>
+            <select id="filterZielgruppe">
+                <option value="">Zielgruppe</option>
+                <option value="Arbeitssuchende">Arbeitssuchende</option>
+                <option value="Migranten">Migranten/Flüchtlinge</option>
+            </select>
             <select id="filterCategory">
-                <option value="">Art der Maßnahme</option>
+                <option value="">Kursart</option>
+                <option value="Ausbildung">Ausbildung</option>
                 <option value="Coaching">Coaching</option>
-                <option value="Weiterbildung">Weiterbildung</option>
+                <option value="Fortbildung">Fortbildung</option>
                 <option value="Rehabilitation und Integration">Rehabilitation und Integration</option>
+                <option value="Weiterbildung">Weiterbildung</option>
             </select>
             <select id="filterDifficulty">
-                <option value="">Schwierigkeit auswählen</option>
-                <option value="Anfänger">Anfänger</option>
-                <option value="Erfahren">Erfahren</option>
+                <option value="">Bereich</option>
+                <option value="Berufsübergreifend">Berufsübergreifend</option>
+                <option value="IT/EDV">IT/EDV</option>
             </select>
             <select id="filterIsFree">
-                <option value="">Alle Kurse</option>
-                <option value="true">Kostenlos</option>
-                <option value="false">Kostenpflichtig</option>
+                <option value="">Förderung</option>
+                <option value="true">Ja</option>
+                <option value="false">Nein</option>
             </select>
+            <div class="filter-item">
+                <label for="filterStartDate">Frühestes Startdatum:</label>
+                <input type="date" id="filterStartDate">
+            </div>
+            
+    
             <button id="resetButton">Auswahl zurücksetzen</button>
         </div>
         

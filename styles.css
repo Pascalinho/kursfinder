@@ -106,11 +106,12 @@ h1 {
 }
 
 input[type="text"], select {
-    width: 100%;
-    padding: 8px 12px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
+    background-color: white;
+    font-family: inherit;
+    font-size: inherit;
 }
 
 
@@ -160,10 +161,10 @@ button:hover {
     margin-bottom: 20px;
     }
 
-.filter-container input[type="text"],
+.filter-container input[type="text"], input[type="date"],
 .filter-container select {
     flex: 1; /* Allows items to grow and fill the space */
-    min-width: 120px; /* Minimum width before wrapping */
+    min-width: 300px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -176,6 +177,8 @@ button:hover {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-left:auto;
+    
     
 }
 
@@ -183,7 +186,24 @@ button:hover {
     background-color: #0056b3;
 }
 
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; /* Adjust spacing */
+   }
 
+.filter-item label {
+    margin-bottom: 5px; /* Space between label and input */
+    font-weight: bold; /* Optional: makes the label stand out */
+}
+
+input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit; /* Ensures font consistency */
+    font-size: inherit; /* Matches the font size of the document */
+}
 
 @media (max-width: 768px) {
     .container1 {
