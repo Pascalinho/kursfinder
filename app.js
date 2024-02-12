@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 element.classList.add('course-card');
                 element.innerHTML = `
                     <h2>${course.name}</h2>
-                    <p>Start: ${course.startDate}</p>
+                    <p>Nächster Start: ${course.startDate}</p>
                     <p>Dauer: ${course.length}</p>
-                    <p>Typ: ${course.isFree ? 'Kostenlos' : 'Kostenpflichtig'}</p>
+                    
                     <button onclick="window.open('${course.detailPageUrl}', '_blank')">Details</button>
                     ${course.flyerLink ? `<a href="${course.flyerLink}" target="_blank" class="flyer-link">Kursflyer</a>` : ''}
                 `;
