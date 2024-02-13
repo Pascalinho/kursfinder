@@ -54,9 +54,54 @@ document.addEventListener("DOMContentLoaded", function() {
             flyerLink: "TBD",
             location: "Kiel",
             zielgruppe: "Arbeitssuchende",
-            mode: "Vollzeit/Teilzeit" // Indicating both options are available
+            mode: "Vollzeit/Teilzeit" 
         },
-        // Additional courses follow the same pattern...
+
+        {
+            name: "Grundkompetenzen: Deutsch, Mathe, Arbeiten und Bildung 4.0",
+            category: "Weiterbildung",
+            difficulty: "Berufsübergreifend",
+            startDates: ["02.01.2024", "31.01.2024",],
+            startIntervalMonths: 1,
+            length: "1 Monat = 21 Schulungstage",
+            isFree: true,
+            detailPageUrl: "TBD",
+            flyerLink: "TBD",
+            location: "Kiel",
+            zielgruppe: "Migranten",
+            mode: "Vollzeit" 
+        },
+        {
+            name: "Intensiv-Fortbildung JobCoach",
+            category: "Weiterbildung",
+            difficulty: "Berufsübergreifend",
+            startDates: ["02.01.2024", "29.02.2024",],
+            startIntervalMonths: 2,
+            length: "2 Monate = 42 Schulungstage",
+            isFree: false,
+            detailPageUrl: "TBD",
+            flyerLink: "TBD",
+            location: "Rendsburg",
+            zielgruppe: "Arbeitssuchende",
+            mode: "Vollzeit" 
+        },
+        {
+            name: "MS-Office-zeitgemäße Bürosoftware sicher anwenden - 3 Module",
+            category: "Weiterbildung",
+            difficulty: "Berufsübergreifend",
+            startDates: ["02.01.2024", "31.01.2024",],
+            startIntervalMonths: 1,
+            length: "1 Monat = 21 Schulungstage je Modul, einzeln buchbar",
+            isFree: true,
+            detailPageUrl: "TBD",
+            flyerLink: "TBD",
+            location: "Kiel",
+            zielgruppe: "Arbeitssuchende",
+            mode: "Vollzeit" 
+        },
+        
+
+
     ];
 
     const locationImages = {
