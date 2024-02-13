@@ -39,61 +39,72 @@
                 <img id="locationImage" src="tertia.jpg" alt="Standort" style="max-width: 100%; height: auto;">
         <div id="locationText">Herzlich willkommen bei TERTIA</div>
         
-        
-        <div class="filter-container">
-            <div class="filter-item">
-                <label for="input">Nach Kursen suchen</label>
-            <input type="text" id="searchQuery" placeholder="Stichwort...">
+        <div class="app-container">
+            <div id="coursesContainer" class="courses-area"></div>
+        <div class="filters-area">
+            <div class="filter-container">
+                <div class="filter-item">
+                    <label for="input">Nach Kursen suchen</label>
+                <input type="text" id="searchQuery" placeholder="Stichwort...">
+                </div><div class="filter-item">
+                    <label for="filterLocation">Standort wählen</label>
+                <select id="filterLocation">
+                    <option value="">Alle Standorte</option>
+                    <option value="Kiel">Kiel</option>
+                    <option value="Rendsburg">Rendsburg</option>
+                </select></div><div class="filter-item">
+                    <label for="filterZielgruppe">Zielgruppe wählen</label>
+                <select id="filterZielgruppe">
+                    <option value="">Alle Zielgruppen</option>
+                    <option value="Arbeitssuchende">Arbeitssuchende</option>
+                    <option value="Migranten">Migranten/Flüchtlinge</option>
+                </select></div><div class="filter-item">
+                    <label for="filterCategory">Kursart</label>
+                <select id="filterCategory">
+                    <option value="">Alle Kursarten</option>
+                    <option value="Ausbildung">Ausbildung</option>
+                    <option value="Coaching">Coaching</option>
+                    <option value="Fortbildung">Fortbildung</option>
+                    <option value="Rehabilitation und Integration">Rehabilitation und Integration</option>
+                    <option value="Weiterbildung">Weiterbildung</option>
+                </select>
             </div><div class="filter-item">
-                <label for="filterLocation">Standort wählen</label>
-            <select id="filterLocation">
-                <option value="">Alle Standorte</option>
-                <option value="Kiel">Kiel</option>
-                <option value="Rendsburg">Rendsburg</option>
-            </select></div><div class="filter-item">
-                <label for="filterZielgruppe">Zielgruppe wählen</label>
-            <select id="filterZielgruppe">
-                <option value="">Alle Zielgruppen</option>
-                <option value="Arbeitssuchende">Arbeitssuchende</option>
-                <option value="Migranten">Migranten/Flüchtlinge</option>
-            </select></div><div class="filter-item">
-                <label for="filterCategory">Kursart</label>
-            <select id="filterCategory">
-                <option value="">Alle Kursarten</option>
-                <option value="Ausbildung">Ausbildung</option>
-                <option value="Coaching">Coaching</option>
-                <option value="Fortbildung">Fortbildung</option>
-                <option value="Rehabilitation und Integration">Rehabilitation und Integration</option>
-                <option value="Weiterbildung">Weiterbildung</option>
-            </select>
-        </div><div class="filter-item">
-            <label for="filterDifficulty">Bereich wählen</label>
-            <select id="filterDifficulty">
-                <option value="">Alle Bereiche</option>
-                <option value="Berufsübergreifend">Berufsübergreifend</option>
-                <option value="IT/EDV">IT/EDV</option>
-            </select>
-        </div>
-            <div class="filter-item">
-                <label for="filterIsFree">Förderung vorhanden?</label>
-            <select id="filterIsFree">
-                <option value="">Alle</option>
-                <option value="true">Ja</option>
-                <option value="false">Nein</option>
-            </select>
-        </div>
-            <div class="filter-item">
-                <label for="filterStartDate">Frühestes Startdatum:</label>
-                <input type="date" id="filterStartDate">
+                <label for="filterDifficulty">Bereich wählen</label>
+                <select id="filterDifficulty">
+                    <option value="">Alle Bereiche</option>
+                    <option value="Berufsübergreifend">Berufsübergreifend</option>
+                    <option value="IT/EDV">IT/EDV</option>
+                </select>
             </div>
-            
-            <div class="filter-item">
-                <label for="resetbutton" style="color:white;">1</label>
-            <button id="resetButton">Auswahl zurücksetzen</button>
+                <div class="filter-item">
+                    <label for="filterIsFree">Förderung vorhanden?</label>
+                <select id="filterIsFree">
+                    <option value="">Alle</option>
+                    <option value="true">Ja</option>
+                    <option value="false">Nein</option>
+                </select>
+            </div>
+                <div class="filter-item">
+                    <label for="filterStartDate">Frühestes Startdatum:</label>
+                    <input type="date" id="filterStartDate">
+                </div>
+                <div class="filter-item">
+                    <label for="filterMode">Modus wählen:</label>
+                <select id="filterMode">
+                    <option value="">Alle Modi</option>
+                    <option value="Vollzeit">Vollzeit</option>
+                    <option value="Teilzeit">Teilzeit</option>
+                </select>
+                </div>
+                
+                <div class="filter-item" style="margin-left:auto;">
+                    <label for="resetbutton" style="color:white;">1</label>
+                <button id="resetButton">Auswahl zurücksetzen</button>
+                </div>
             </div>
         </div>
         
-        <div id="coursesContainer"></div>
+        
     </div>
     <script src="app.js"></script>
 </body>

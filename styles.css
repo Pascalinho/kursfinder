@@ -1,3 +1,27 @@
+.app-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.courses-area {
+    flex: 3; /* Takes 3/4th of the space */
+    margin-right: 20px; /* Adds some space between courses and filters */
+}
+
+.filters-area {
+    flex: 1; /* Takes 1/4th of the space */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Add your remaining CSS here */
+
+
+
 html {
     overflow-y: scroll;
 }
@@ -225,4 +249,12 @@ input[type="date"] {
         flex-direction: column;
         align-items: flex-start;
     }
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .courses-area, .filters-area {
+        margin-right: 0;
+}
 }
