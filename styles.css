@@ -5,17 +5,19 @@
 }
 
 .courses-area {
-    flex: 3; /* Takes 3/4th of the space */
+    flex: 1; /* Takes 3/4th of the space */
     margin-right: 20px; /* Adds some space between courses and filters */
 }
 
 .filters-area {
-    flex: 1; /* Takes 1/4th of the space */
-    display: flex;
-    flex-direction: column;
+    width: 250px; /* Adjust width as needed */
+    height: calc(100vh - 40px); /* Adjust based on your header/footer height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    position: sticky;
+    top: 20px; /* Adjust based on your header height */
     padding: 20px;
-    background-color: #f8f9fa;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #f8f9fa;
 }
 
 /* Add your remaining CSS here */
@@ -41,6 +43,7 @@ body {
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+   
 }
 
 .container1 {
@@ -85,6 +88,9 @@ h1 {
     border: 1px solid #ddd;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
+    height:300px;
+    width:300px;
+    
 }
 
 
@@ -235,6 +241,12 @@ input[type="date"] {
 }
 
 @media (max-width: 768px) {
+
+    .container {
+        flex-direction: column;
+
+    }
+
     .container1 {
         display:none;
         flex-direction: column;
@@ -256,5 +268,12 @@ input[type="date"] {
 
     .courses-area, .filters-area {
         margin-right: 0;
+}
+
+.filters-area {
+    width: auto;
+    height: auto;
+    position: relative;
+    top: 0;
 }
 }
