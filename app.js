@@ -135,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function() {
         updateLocationImage(); // Update location image and text based on filters
     }
     
-    
     function filterCourses() {
         const searchQuery = document.getElementById('searchQuery').value.toLowerCase();
         const filterCategory = document.getElementById('filterCategory').value;
@@ -171,10 +170,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
     
+            // Adjusted filterMode logic to handle "Vollzeit/Teilzeit" courses
+            const courseModes = course.mode.split('/').map(mode => mode.trim());
+            const modeMatches = !filterMode || courseModes.includes(filterMode);
+    
             // Additional filter checks
             return includeCourse &&
+                   modeMatches &&
                    (!searchQuery || course.name.toLowerCase().includes(searchQuery)) &&
-                   (!filterMode || course.mode === filterMode) &&
                    (!filterCategory || course.category === filterCategory) &&
                    (!filterDifficulty || course.difficulty === filterDifficulty) &&
                    (filterIsFree === "" || course.isFree === (filterIsFree === "true")) &&
@@ -184,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
         displayCourses(filteredCourses);
     }
+    
     
     
     
