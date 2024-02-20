@@ -7,7 +7,8 @@
       "Startdaten": "3.2.2024, 4.5.2024",
       "Maßnahme": "Weiterbildung",
       "Finanzierung": "Agentur für Arbeit, Jobcenter",
-      "Url": "https://www.tertia.de/tobi_ms-office/"
+      "Url": "https://www.tertia.de/tobi_ms-office/",
+      "Category": "Gastronomie"
     },
     {
       "Kursname": "MS Office Modul 2: AUFBAU MS-Office Word, MS-Office\n  Excel",
@@ -17,7 +18,8 @@
       "Startdaten": "02.04.2024",
       "Maßnahme": "Weiterbildung",
       "Finanzierung": "Agentur für Arbeit, Jobcenter",
-      "Url": "https://www.tertia.de/tobi_ms-office/"
+      "Url": "https://www.tertia.de/tobi_ms-office/",
+      "Category": "Gastronomie"
     },
     {
       "Kursname": "MS Office Modul 3: MS-Office\n  Outlook, MS-Office PowerPoint, Mobiles Arbeiten und Kommunikation",
@@ -27,7 +29,8 @@
       "Startdaten": "03.04.2024",
       "Maßnahme": "Weiterbildung",
       "Finanzierung": "Agentur für Arbeit, Jobcenter",
-      "Url": "https://www.tertia.de/tobi_ms-office/"
+      "Url": "https://www.tertia.de/tobi_ms-office/",
+      "Category": "Anlagenmechanik"
     },
     {
       "Kursname": "Digitaler Führerschein 4.0 - digitale\n  Grundkompetenzen",
@@ -37,6 +40,7 @@
       "Startdaten": "03.04.2024, 03.05.2024, 06.06.2024, 05.07.2024, 05.08.2024, 04.09.2024, 07.10.2024, 07.11.2024, 09.12.2024",
       "Maßnahme": "Weiterbildung",
       "Finanzierung": "Agentur für Arbeit, Jobcenter",
-      "Url": "https://www.tertia.de/tobi_digi_fs/"
+      "Url": "https://www.tertia.de/tobi_digi_fs/",
+      "Category": "Einzelhandel"
     }
   ]

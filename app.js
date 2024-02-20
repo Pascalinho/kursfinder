@@ -13,23 +13,42 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('suche').addEventListener('input', filterAndDisplayCourses);
     document.getElementById('bildungsgutscheinToggle').addEventListener('change', filterAndDisplayCourses);
 
-    function filterAndDisplayCourses() {
-        const searchQuery = document.getElementById('suche').value.toLowerCase();
-        const bildungsgutscheinToggle = document.getElementById('bildungsgutscheinToggle').checked;
+    let selectedCategory = "Alle Berufsgruppen"; // Default category
 
-        const filteredRecords = globalRecords.filter(record => {
-            const matchesSearch = record["Kursname"].toLowerCase().includes(searchQuery);
-            const matchesBildungsgutschein = !bildungsgutscheinToggle || record["Bildungsgutschein"] === "true";
-            return matchesSearch && matchesBildungsgutschein;
+    
+function attachButtonEventListeners() {
+    const buttons = document.querySelectorAll(".button-container button");
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Logic to update the selected category and re-filter courses
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedCategory = this.textContent; // Update selectedCategory with the button's text
+            filterAndDisplayCourses(); // Call filterAndDisplayCourses without passing parameters
         });
+    });
+}
 
-        sortAndDisplayCourses(filteredRecords);
-        updateCourseCounts(globalRecords.length, filteredRecords.length);
-    }
+
+function filterAndDisplayCourses() {
+    const searchQuery = document.getElementById('suche').value.toLowerCase();
+    const bildungsgutscheinToggle = document.getElementById('bildungsgutscheinToggle').checked;
+
+    const filteredRecords = globalRecords.filter(record => {
+        const matchesSearch = record["Kursname"].toLowerCase().includes(searchQuery);
+        const matchesBildungsgutschein = !bildungsgutscheinToggle || record["Bildungsgutschein"] === "true";
+        const matchesCategory = selectedCategory === "Alle Berufsgruppen" || record["Category"] === selectedCategory;
+        return matchesSearch && matchesBildungsgutschein && matchesCategory;
+    });
+
+    sortAndDisplayCourses(filteredRecords);
+    updateCourseCounts(globalRecords.length, filteredRecords.length);
+}
+
 
     function updateCourseCounts(total, filtered) {
         const countsContainer = document.getElementById('countsContainer');
-        countsContainer.innerHTML = `Alle: ${total}  Angezeigt: <strong>${filtered}</strong>`;
+        countsContainer.innerHTML = `Alle: ${total} <br> Angezeigt: <strong>${filtered}</strong>`;
     }
 
     function sortAndDisplayCourses(records) {
@@ -149,7 +168,29 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     
-    
+    initializeButtonSelection();
+    attachButtonEventListeners();
     
     
 });
+
+function initializeButtonSelection() {
+    // Set the "Alle Berufsgruppen" button as selected by default
+    document.querySelector(".button-container button").classList.add('selected');
+}
+
+function attachButtonEventListeners() {
+    const buttons = document.querySelectorAll(".button-container button");
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove 'selected' class from all buttons
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            // Add 'selected' class to the clicked button
+            this.classList.add('selected');
+            // Update selectedCategory based on the clicked button
+            selectedCategory = this.textContent;
+            // Re-filter and display courses with all current criteria
+            filterAndDisplayCourses();
+        });
+    });
+}
