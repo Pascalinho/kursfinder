@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const moreDatesAvailable = allDates.length > initialDates.length;
 
         content.innerHTML = `
-            <p>Starttermine: <strong>${formattedStartDates}</strong>${moreDatesAvailable ? '<span class="toggle-dates"> + mehr Termine</span>' : ''}</p>
+            <p>Starttermine: <strong>${formattedStartDates}</strong>${moreDatesAvailable ? ' <span class="toggle-dates">+ weitere Termine</span>' : ''}</p>
             <h3>${record["Kursname"]}</h3>
             <div style="display:flex; gap:20px; padding-top:10px;">
                 <p><i class="fas fa-clock"></i> ${record["Vollzeit/Teilzeit"]}</p>
@@ -97,15 +97,15 @@ document.addEventListener("DOMContentLoaded", function() {
         const datesDisplay = content.querySelector('p > strong');
         const toggleSpan = content.querySelector('.toggle-dates');
 
-        if (toggleSpan.textContent.includes(' + mehr Termine')) {
+        if (toggleSpan.textContent.includes('weitere')) {
             // Show all dates
             datesDisplay.textContent = allDates.map(dateStr => formatDate(dateStr)).join(', ');
-            toggleSpan.textContent = ' - weniger Termine';
+            toggleSpan.textContent = '- weniger anzeigen';
         } else {
             // Show initial dates
             const initialDates = allDates.slice(0, 3);
             datesDisplay.textContent = initialDates.map(dateStr => formatDate(dateStr)).join(', ');
-            toggleSpan.textContent = ' + mehr Termine';
+            toggleSpan.textContent = '+ weitere Termine';
         }
     }
 
