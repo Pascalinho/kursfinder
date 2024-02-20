@@ -85,7 +85,12 @@ document.addEventListener("DOMContentLoaded", function() {
         element.innerHTML = `
             <p>Starttermine: <strong><span class="dates-list">${initialFormattedStartDates}</span></strong></p>
             <h3 id="kursname">${record["Kursname"]}</h3>
-            <p>${record["Vollzeit/Teilzeit"]}</p>
+            <div style="display:flex; gap:20px; padding-top:10px;">
+            <p><span><i class="fas fa-clock"></i></span> ${record["Vollzeit/Teilzeit"]}</p>
+            <p><span><i class="fas fa-book"></i></span> ${record["Maßnahme"]}</p>
+            <p><span><i class="fas fa-coins"></i></span> ${record["Finanzierung"]}</p>
+            </div>
+            <button type="button" class="btn btn-secondary details-btn" data-url="${record["Url"]}">Details</button>
         `;
     
         // Toggle functionality
@@ -101,6 +106,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         });
+
+        const detailsBtn = element.querySelector('.details-btn');
+    detailsBtn.addEventListener('click', function() {
+        window.open(this.getAttribute('data-url'), '_blank');
+    });
     
         return element;
     }
