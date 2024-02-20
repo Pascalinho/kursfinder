@@ -51,34 +51,70 @@ document.addEventListener("DOMContentLoaded", function() {
     function createCourseCard(record) {
         const element = document.createElement('div');
         element.classList.add('course-card');
-
-        let formattedStartDates = '';
+        
+        let initialFormattedStartDates = '';
+        let allFormattedStartDates = ''; // For initial + additional dates
+    
         if (record["Startdaten"]) {
             const currentDate = new Date();
-            currentDate.setHours(0, 0, 0, 0);
-
-            const startDatesArray = record["Startdaten"].split(', ').filter(dateStr => {
+            currentDate.setHours(0, 0, 0, 0); // Normalize current date to start of day for comparison
+    
+            const futureDates = record["Startdaten"].split(', ').filter(dateStr => {
                 const [day, month, year] = dateStr.split('.').map(Number);
                 const date = new Date(year, month - 1, day);
                 return date >= currentDate;
             });
-
-            formattedStartDates = startDatesArray.map(dateStr => {
-                const [day, month, year] = dateStr.split('.');
-                const date = new Date(year, month - 1, day);
-                return date.toLocaleDateString('de-DE', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-            }).join(', ');
+    
+            const displayDates = futureDates.slice(0, 3);
+            const additionalDates = futureDates.slice(3);
+    
+            // Format the first three dates for initial display
+            initialFormattedStartDates = displayDates.map(dateStr => formatDate(dateStr)).join(', ');
+    
+            // Format all dates for expanded view
+            allFormattedStartDates = futureDates.map(dateStr => formatDate(dateStr)).join(', ');
+    
+            // Add toggle sign if there are additional dates
+            if (additionalDates.length > 0) {
+                initialFormattedStartDates += ` <span class="toggle-dates">weitere anzeigen</span>`;
+                allFormattedStartDates += ` <span class="toggle-dates">weniger anzeigen</span>`;
+            }
         }
-
+    
+        // Set the initial content with the toggle sign
         element.innerHTML = `
-            <p>Starttermine: <strong>${formattedStartDates}</strong></p>
+            <p>Starttermine: <strong><span class="dates-list">${initialFormattedStartDates}</span></strong></p>
             <h3 id="kursname">${record["Kursname"]}</h3>
             <p>${record["Vollzeit/Teilzeit"]}</p>
         `;
+    
+        // Toggle functionality
+        const datesListSpan = element.querySelector('.dates-list');
+        element.addEventListener('click', function(event) {
+            if (event.target.classList.contains('toggle-dates')) {
+                if (event.target.textContent === 'weitere anzeigen') {
+                    // Expand to show all dates
+                    datesListSpan.innerHTML = allFormattedStartDates;
+                } else {
+                    // Collapse to show initial dates only
+                    datesListSpan.innerHTML = initialFormattedStartDates;
+                }
+            }
+        });
+    
         return element;
     }
+    
+    // Helper function to format dates
+    function formatDate(dateStr) {
+        const [day, month, year] = dateStr.split('.').map(Number);
+        const date = new Date(year, month - 1, day);
+        return date.toLocaleDateString('de-DE', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }
+    
+    
 });
