@@ -6,106 +6,242 @@
     <title>Kursfinder Demo</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
 <body>
-    <div class="container1">
-        <!-- Logo -->
-        <div class="logo">
-            <a href="/">
-                <img src="log.png" alt="Your Logo" style="height: 50px;"> <!-- Adjust the path and size as needed -->
-            </a>
+    <div class="header">
+        <div class="logo-container">
+          <a href="https://tertia.de">
+            <img src="https://www.tertia.de/wp-content/uploads/2021/10/LOGO-TERTIA_neu.png" alt="TERTIA Logo">
+          </a>
         </div>
-    
-        <!-- Navigation Menu -->
-        <nav class="main-navigation">
-            <ul class="nav-menu">
-                <li><a href="https://www.tertia.de/standort-suche/">Standortsuche</a></li>
-                <li><a href="https://www.tertia.de/unsere-angebote/">Unsere Angebote</a></li>
-                <li><a href="https://www.tertia.de/neuigkeiten/">Neuigkeiten</a></li>
-                <li><a href="https://www.tertia.de/ueber-tertia/">Über TERTIA</a></li>
-                <li><a href="https://www.tertia.de/jobs/">Stellenangebote</a></li>
-            </ul>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="https://tertia.de/standortsuche">Standortsuche</a></li>
+            <li><a href="https://tertia.de/unsere-angebote">Unsere Angebote</a></li>
+            <li><a href="https://tertia.de/neuigkeiten">Neuigkeiten</a></li>
+            <li><a href="https://tertia.de/uber-tertia">Über TERTIA</a></li>
+            <li><a href="https://tertia.de/stellenangebote">Stellenangebote</a></li>
+            <li><a id="current" href="https://tertia.de/kursfinder">Kursfinder</a></li>
+          </ul>
         </nav>
-    
-        <!-- Search Icon -->
-        <div class="search-icon">
-            <a href="https://www.tertia.de/suche/">
-                <i class="fas fa-search"></i>
-            </a>
+        <div class="search-container">
+          <a href="https://tertia.de/suche">
+            <img src="search.png" alt="Search">
+          </a>
         </div>
-    </div>
+      </div>
+      <div style="background-color: #E1EBF7; height:120px;">
+        <h1 style="margin:auto; text-align:center; padding-top: 40px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            Tertia Kursfinder
+        </h1>
+      </div>
     <div class="container">
-                <img id="locationImage" src="tertia.jpg" alt="Standort" style="max-width: 100%; height: auto;">
-        <div id="locationText">Herzlich willkommen bei TERTIA</div>
-        
-        <div class="app-container">
-            <div id="coursesContainer" class="courses-area"></div>
-        <div class="filters-area">
-            <div class="filter-container">
-                <div class="filter-item">
-                    <label for="input">Nach Kursen suchen</label>
-                <input type="text" id="searchQuery" placeholder="Stichwort...">
-                </div><div class="filter-item">
-                    <label for="filterLocation">Standort wählen</label>
-                <select id="filterLocation">
-                    <option value="">Alle Standorte</option>
-                    <option value="Kiel">Kiel</option>
-                    <option value="Rendsburg">Rendsburg</option>
-                </select></div><div class="filter-item">
-                    <label for="filterZielgruppe">Zielgruppe wählen</label>
-                <select id="filterZielgruppe">
-                    <option value="">Alle Zielgruppen</option>
-                    <option value="Arbeitssuchende">Arbeitssuchende</option>
-                    <option value="Migranten">Migranten/Flüchtlinge</option>
-                </select></div><div class="filter-item">
-                    <label for="filterCategory">Kursart</label>
-                <select id="filterCategory">
-                    <option value="">Alle Kursarten</option>
-                    <option value="Ausbildung">Ausbildung</option>
-                    <option value="Coaching">Coaching</option>
-                    <option value="Fortbildung">Fortbildung</option>
-                    <option value="Rehabilitation und Integration">Rehabilitation und Integration</option>
-                    <option value="Weiterbildung">Weiterbildung</option>
-                </select>
-            </div><div class="filter-item">
-                <label for="filterDifficulty">Bereich wählen</label>
-                <select id="filterDifficulty">
-                    <option value="">Alle Bereiche</option>
-                    <option value="Berufsübergreifend">Berufsübergreifend</option>
-                    <option value="IT/EDV">IT/EDV</option>
-                </select>
-            </div>
-                <div class="filter-item">
-                    <label for="filterIsFree">Förderung vorhanden?</label>
-                <select id="filterIsFree">
-                    <option value="">Alle</option>
-                    <option value="true">Ja</option>
-                    <option value="false">Nein</option>
-                </select>
-            </div>
-                <div class="filter-item">
-                    <label for="filterStartDate">Frühestes Startdatum:</label>
-                    <input type="date" id="filterStartDate">
+        <aside class="filter-sidebar">
+          <div class="filter-group">
+              <div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="bildungsgutscheinToggle">
+                  <label class="form-check-label" for="flexSwitchCheckDefault">Mit Bildungsgutschein</label>
                 </div>
-                <div class="filter-item">
-                    <label for="filterMode">Modus wählen:</label>
-                <select id="filterMode">
-                    <option value="">Alle Modi</option>
-                    <option value="Vollzeit">Vollzeit</option>
-                    <option value="Teilzeit">Teilzeit</option>
+              </div>
+
+              <div>
+                <label for="exampleFormControlInput1" class="form-label">Stichwortsuche</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Suchen">
+              </div>
+
+              <div>
+                <label for="exampleFormControlInput1" class="form-label">Standort wählen</label>
+                <select class="form-select">
+                  <option selected>Alle Standorte</option>
+                  <option value="Aachen">Aachen</option>
+<option value="Altena">Altena</option>
+<option value="Barsinghausen">Barsinghausen</option>
+<option value="Bergheim">Bergheim</option>
+<option value="Berlin-Charlottenburg">Berlin-Charlottenburg</option>
+<option value="Berlin-Friedrichshain">Berlin-Friedrichshain</option>
+<option value="Berlin-Mitte">Berlin-Mitte</option>
+<option value="Berlin-Neukölln">Berlin-Neukölln</option>
+<option value="Berlin-Reinickendorf">Berlin-Reinickendorf</option>
+<option value="Berlin-Schöneberg">Berlin-Schöneberg</option>
+<option value="Berlin-Spandau">Berlin-Spandau</option>
+<option value="Berlin-Tempelhof">Berlin-Tempelhof</option>
+<option value="Berlin-Treptow">Berlin-Treptow</option>
+<option value="Bitterfeld-Wolfen">Bitterfeld-Wolfen</option>
+<option value="Bonn - Fachbereich Rehabilitation">Bonn - Fachbereich Rehabilitation</option>
+<option value="Bonn">Bonn</option>
+<option value="Bremen-Mitte">Bremen-Mitte</option>
+<option value="Bremen-Nord">Bremen-Nord</option>
+<option value="Bremen-Ost">Bremen-Ost</option>
+<option value="Bremen-Süd">Bremen-Süd</option>
+<option value="Bremen-West">Bremen-West</option>
+<option value="Brühl">Brühl</option>
+<option value="Delmenhorst">Delmenhorst</option>
+<option value="Dessau-Rosslau">Dessau-Rosslau</option>
+<option value="Dortmund">Dortmund</option>
+<option value="Duisburg">Duisburg</option>
+<option value="Düren">Düren</option>
+<option value="Düsseldorf">Düsseldorf</option>
+<option value="Elmshorn">Elmshorn</option>
+<option value="Erkelenz">Erkelenz</option>
+<option value="Esslingen">Esslingen</option>
+<option value="Euskirchen">Euskirchen</option>
+<option value="Flensburg">Flensburg</option>
+<option value="Frankfurt am Main">Frankfurt am Main</option>
+<option value="Frechen">Frechen</option>
+<option value="Gelsenkirchen">Gelsenkirchen</option>
+<option value="Göppingen">Göppingen</option>
+<option value="Hagen">Hagen</option>
+<option value="Halle">Halle</option>
+<option value="Hamburg">Hamburg</option>
+<option value="Hannover">Hannover</option>
+<option value="Heide">Heide</option>
+<option value="Heidelberg">Heidelberg</option>
+<option value="Herford">Herford</option>
+<option value="Herne">Herne</option>
+<option value="Hildesheim">Hildesheim</option>
+<option value="Husum">Husum</option>
+<option value="Hückeswagen">Hückeswagen</option>
+<option value="Hürth">Hürth</option>
+<option value="Iserlohn">Iserlohn</option>
+<option value="Itzehoe">Itzehoe</option>
+<option value="Kaiserslautern">Kaiserslautern</option>
+<option value="Kall">Kall</option>
+<option value="Kassel">Kassel</option>
+<option value="Kempen">Kempen</option>
+<option value="Kerpen">Kerpen</option>
+<option value="Kiel">Kiel</option>
+<option value="Kirchheimbolanden">Kirchheimbolanden</option>
+<option value="Koblenz">Koblenz</option>
+<option value="Konstanz">Konstanz</option>
+<option value="Krefeld">Krefeld</option>
+<option value="Köln">Köln</option>
+<option value="Köthen">Köthen</option>
+<option value="Landau">Landau</option>
+<option value="Langenfeld – BreakUp">Langenfeld – BreakUp</option>
+<option value="Langenfeld">Langenfeld</option>
+<option value="Langenhagen">Langenhagen</option>
+<option value="Leipzig">Leipzig</option>
+<option value="Leverkusen">Leverkusen</option>
+<option value="Losheim am See">Losheim am See</option>
+<option value="Ludwigsburg">Ludwigsburg</option>
+<option value="Ludwigshafen">Ludwigshafen</option>
+<option value="Lüdenscheid">Lüdenscheid</option>
+<option value="Magdeburg">Magdeburg</option>
+<option value="Mainz-Weisenau">Mainz-Weisenau</option>
+<option value="Mannheim">Mannheim</option>
+<option value="Mettmann">Mettmann</option>
+<option value="Moers">Moers</option>
+<option value="Neunkirchen">Neunkirchen</option>
+<option value="Neuss">Neuss</option>
+<option value="Neustadt an der Weinstraße">Neustadt an der Weinstraße</option>
+<option value="Niebüll">Niebüll</option>
+<option value="Nordstemmen">Nordstemmen</option>
+<option value="Nürnberg">Nürnberg</option>
+<option value="Oberhausen">Oberhausen</option>
+<option value="Oldenburg">Oldenburg</option>
+<option value="Paderborn">Paderborn</option>
+<option value="Plettenberg">Plettenberg</option>
+<option value="Potsdam">Potsdam</option>
+<option value="Ratingen">Ratingen</option>
+<option value="Recklinghausen">Recklinghausen</option>
+<option value="Rendsburg">Rendsburg</option>
+<option value="Saarbrücken">Saarbrücken</option>
+<option value="Saarlouis">Saarlouis</option>
+<option value="Salzgitter">Salzgitter</option>
+<option value="Schleswig">Schleswig</option>
+<option value="Siegburg">Siegburg</option>
+<option value="Siegen">Siegen</option>
+<option value="Sinsheim">Sinsheim</option>
+<option value="Speyer">Speyer</option>
+<option value="Stade">Stade</option>
+<option value="Sulzbach">Sulzbach</option>
+<option value="Velbert">Velbert</option>
+<option value="Viersen">Viersen</option>
+<option value="Villingen-Schwenningen">Villingen-Schwenningen</option>
+<option value="Weinheim">Weinheim</option>
+<option value="Wermelskirchen">Wermelskirchen</option>
+<option value="Wesel">Wesel</option>
+<option value="Wiesbaden">Wiesbaden</option>
+<option value="Wiesloch">Wiesloch</option>
+<option value="Wunstorf">Wunstorf</option>
                 </select>
-                </div>
+              </div>
+              <div>
+                <label for="exampleFormControlInput1" class="form-label">Frühestes Startdatum</label>
+                <input type="date" class="form-control">
+              </div>
+              
+              
+              <div><label class="form-label">Art der Maßnahme</label><div>
                 
-                <div class="filter-item" style="margin-left:auto;">
-                    <label for="resetbutton" style="color:white;">1</label>
-                <button id="resetButton">Auswahl zurücksetzen</button>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Coaching" id="flexCheckDefault">
+                  <label style="font-weight:normal;" class="form-check-label" for="flexCheckDefault">
+                    Coaching
+                  </label>
                 </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Weiterbildung" id="flexCheckDefault">
+                  <label style="font-weight:normal;" class="form-check-label" for="flexCheckDefault">
+                    Weiterbildung
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Reha" id="flexCheckDefault">
+                  <label style="font-weight:normal;" class="form-check-label" for="flexCheckDefault">
+                    Rehabilitation und Integration
+                  </label>
+                </div>
+              </div>
+              </div>
+              
+              <div><label class="form-label">Teilnahme</label><div>
+                
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Coaching" id="flexCheckDefault">
+                  <label style="font-weight:normal;" class="form-check-label" for="flexCheckDefault">
+                    Vollzeit
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Weiterbildung" id="flexCheckDefault">
+                  <label style="font-weight:normal;" class="form-check-label" for="flexCheckDefault">
+                    Teilzeit
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Reha" id="flexCheckDefault">
+                  <label style="font-weight:normal;" class="form-check-label" for="flexCheckDefault">
+                    Individuelle Terminvereinbarung
+                  </label>
+                </div>
+              </div>
             </div>
+
+          </div>
+        </aside>
+        
+        <main >
+          <div style="display:flex; margin-top:1em; padding-left:1em; justify-content: space-between;">
+            <div id="countsContainer"></div>
+            <div>
+              <select class="form-select" aria-label="Default select example" style="max-width: 200px; margin-left:auto; ">
+                <option selected>Datum frühestens</option>
+                <option value="1">A - Z</option>
+                <option value="2">Z - A</option>                
+              </select>
+          </div>
         </div>
-        
-        
+          <div class="results-container" id="coursesContainer">
+
+          </div>
+            <!-- Results will be displayed here -->
+        </main>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>

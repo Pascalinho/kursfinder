@@ -1,278 +1,176 @@
-.app-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px;
-}
-
-.courses-area {
-    flex: 1; /* Takes 3/4th of the space */
-    margin-right: 20px; /* Adds some space between courses and filters */
-}
-
-.filters-area {
-    width: 250px; /* Adjust width as needed */
-    height: calc(100vh - 40px); /* Adjust based on your header/footer height */
-    overflow-y: auto; /* Enable vertical scrolling */
-    position: sticky;
-    top: 20px; /* Adjust based on your header height */
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background-color: #f8f9fa;
-}
-
-/* Add your remaining CSS here */
-
-
-
-html {
-    overflow-y: scroll;
-}
-
-
-body {
-    font-family: Arial, sans-serif;
-    color: #333;
-    background-color: #f8f9fa;
+body, html {
+    height: 100%;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
 }
+
+h3 {
+    font-size:18px;
+}
+
+#current
+{
+color:blue;
+text-decoration: underline;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+  padding: 10px 20px;
+  width:1080px;
+  margin:auto;
+ 
+}
+
+.logo-container img {
+  height: 48px; /* Adjust as needed */
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* Adjust the space between menu items */
+}
+
+.main-nav ul li {
+  padding: 10px 0;
+
+}
+
+.main-nav ul li a {
+  text-decoration: none;
+  color: #000;
+  
+}
+
+.search-container img {
+  height: 32px; /* Adjust as needed */
+}
+
 
 .container {
-    max-width: 1080px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-   
-}
-
-.container1 {
-    max-width: 1080px;
-    margin: auto;
-    padding: 20px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    height: 100vh;
+    max-width: 1080px!important;
+    margin:auto;
 }
 
-.logo img {
-    height: 50px; /* Adjust based on your logo's size */
-    width: auto; /* Maintain aspect ratio */
+.filter-sidebar {
+  flex: 0 0 300px; /* flex-grow | flex-shrink | flex-basis */
+  border-right: 1px solid #ccc;
+  padding: 1em;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
-.nav-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 20px; /* Adjust the space between menu items */
+.filter-group {
+    margin-bottom: 1em;
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* Remaining CSS from the previous example */
-
-
-h1 {
-    color: #0056b3;
-    font-size: 24px;
-    text-align: center;
+.filter-group h3 {
+    margin-bottom: 0.5em;
 }
 
-#coursesContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Creates columns that best fit the container width */
-    gap: 30px; /* Adjust the space between cards */
+
+.results-container {
+    
+  display: flex;
+  flex-direction: column; /* Ensures cards are stacked vertically */
+  width: 100%;
+  padding-top:1em;
+  padding-left:1em;
+    
+}
+
+#kursname
+{
+  font-size:1.remrem;
 }
 
 .course-card {
-    border: 1px solid #ddd;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
-    height:300px;
-    width:300px;
-    }
-
-
-.course-card h2 {
-    margin-top: 0;
-    margin-bottom: 10px; /* Reduce bottom margin of title for compactness */
-    font-size: 18px; /* Optional: Adjust title font size for compactness */
-}
-
-.course-card p {
-    margin: 0; /* Remove default paragraph margins for a tighter look */
-    font-size: 14px; /* Optional: Adjust text size for compactness */
-    margin-bottom:10px;
-}
-
-/* Adjustments for button and flyer link within course cards for consistency */
-.course-card button,
-.course-card .flyer-link {
-    padding: 5px 10px; /* Reduce padding for a more compact button */
-    font-size: 12px; /* Reduce font size for compactness */
-    margin-top: 5px; /* Ensure some space above buttons/links */
-}
-
-
-.course-card a {
-    display: inline-block;
-    background-color: #0056b3;
-    color: #ffffff;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.course-card a:hover {
-    background-color: #004494;
-}
-
-.no-results {
-    text-align: center;
-    padding: 20px;
-    background-color: #ffffff;
-    color: #333;
-}
-
-input[type="text"], select {
-    padding: 8px;
     border: 1px solid #ccc;
+    margin-bottom: 1em;
+    padding: 1em;
     border-radius: 4px;
+    width:100%;
+    height:200px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: 1em;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 16px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height:26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
     background-color: white;
-    font-family: inherit;
-    font-size: inherit;
-}
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  /* Added styles for the label */
+  label {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
 
-
-.flyer-link {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 14px;
-    margin-left: 10px; 
-}
-
-.flyer-link:hover {
-    background-color: #0056b3;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#locationText {
-    text-align:center;
-    font-size:30px;
-    margin-bottom:1em;
-    margin-top:1em;
-}
-
-.filter-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    justify-items: center;
-    margin-bottom: 20px;
-    }
-
-.filter-container input[type="text"], input[type="date"],
-.filter-container select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#resetButton {
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    max-width:200px;
-    
-    
-}
-
-.filter-item #resetButton {
-    margin-left:auto;
-    margin-right:auto;
-}
-
-#resetButton:hover {
-    background-color: #0056b3;
-}
-
-.filter-item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px; /* Adjust spacing */
-    min-width:250px;
-   }
-
-.filter-item label {
-    margin-bottom: 5px; /* Space between label and input */
-    font-weight: bold; /* Optional: makes the label stand out */
-}
-
-input[type="date"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: inherit; /* Ensures font consistency */
-    font-size: inherit; /* Matches the font size of the document */
-}
 
 @media (max-width: 768px) {
-
-    .container {
-        flex-direction: column;
-
+    .filter-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
     }
 
-    .container1 {
-        display:none;
-        flex-direction: column;
-        align-items: flex-start;
+    .results-container {
+        width: 100%;
     }
-
-    .nav-menu, .search-icon {
-        margin-top: 10px; /* Add some space between items */
-    }
-
-    .nav-menu {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .app-container {
-        flex-direction: column;
-    }
-
-    .courses-area, .filters-area {
-        margin-right: 0;
 }
 
-.filters-area {
-    width: auto;
-    height: auto;
-    position: relative;
-    top: 0;
-}
-}

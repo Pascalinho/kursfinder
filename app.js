@@ -1,283 +1,121 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const coursesData = [
-        {
-            name: "Ausbildereignung (AEVO)",
-            category: "Weiterbildung",
-            difficulty: "Berufsübergreifend",
-            startDates: ["02.01.2024", "29.02.2024"],
-            startIntervalMonths: 2,
-            length: "1 Monat = 21 Schulungstage",
-            isFree: true,
-            detailPageUrl: "https://www.tertia.de/massnahmen/ausbildung-der-ausbilder-ada-46/",
-            flyerLink: "https://www.tertia.de/wp-content/uploads/Flyer_TOBi_AEVO_Kiel.pdf",
-            location: "Kiel",
-            zielgruppe: "Arbeitssuchende",
-            mode: "Vollzeit"
-        },
-        {
-            name: "Betreuungsassistent:in",
-            category: "Weiterbildung",
-            difficulty: "Berufsübergreifend",
-            startDates: ["02.01.2024", "29.02.2024"],
-            startIntervalMonths: 0,
-            length: "2 Monate = 42 Schulungstage",
-            isFree: true,
-            detailPageUrl: "TBD",
-            flyerLink: "TBD",
-            location: "Kiel",
-            zielgruppe: "Arbeitssuchende",
-            mode: "Vollzeit"
-        },
-        {
-            name: "DATEV - Finanzbuchführung sowie Lohn und Gehalt (2 Module)",
-            category: "Weiterbildung",
-            difficulty: "Berufsübergreifend",
-            startDates: ["31.01.2024", "03.04.2024"],
-            startIntervalMonths: 0,
-            length: "2 Monate = 42 Schulungstage",
-            isFree: true,
-            detailPageUrl: "TBD",
-            flyerLink: "TBD",
-            location: "Kiel",
-            zielgruppe: "Arbeitssuchende",
-            mode: "Vollzeit"
-        },
-        {
-            name: "Digitaler Führerschein - Vermittlung von Grundkompetenzen",
-            category: "Weiterbildung",
-            difficulty: "Berufsübergreifend",
-            startDates: ["02.01.2024", "31.01.2024", /* Monthly start dates */],
-            startIntervalMonths: 1,
-            length: "3 Monate = 63 Schulungstage (Vollzeit), 4,5 Monate = 95 Schulungstage (Teilzeit)",
-            isFree: true,
-            detailPageUrl: "TBD",
-            flyerLink: "TBD",
-            location: "Kiel",
-            zielgruppe: "Arbeitssuchende",
-            mode: "Vollzeit/Teilzeit" 
-        },
+    const AIRTABLE_TOKEN = 'pats5Oet0d0PGyFmR.def41c9b7f9e808d422c0a19681292480fc7ff9dd66dc28ec6491d91b8be4393';
+    const AIRTABLE_BASE_ID = 'appj3D4x39x7XOzzY';
+    const AIRTABLE_TABLE_NAME = 'tblreycUb9W8dGYAp';
+    const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
 
-        {
-            name: "Grundkompetenzen: Deutsch, Mathe, Arbeiten und Bildung 4.0",
-            category: "Weiterbildung",
-            difficulty: "Berufsübergreifend",
-            startDates: ["02.01.2024", "31.01.2024",],
-            startIntervalMonths: 1,
-            length: "1 Monat = 21 Schulungstage",
-            isFree: true,
-            detailPageUrl: "TBD",
-            flyerLink: "TBD",
-            location: "Kiel",
-            zielgruppe: "Migranten",
-            mode: "Vollzeit" 
-        },
-        {
-            name: "Intensiv-Fortbildung JobCoach",
-            category: "Weiterbildung",
-            difficulty: "Berufsübergreifend",
-            startDates: ["02.01.2024", "29.02.2024",],
-            startIntervalMonths: 2,
-            length: "2 Monate = 42 Schulungstage",
-            isFree: false,
-            detailPageUrl: "TBD",
-            flyerLink: "TBD",
-            location: "Rendsburg",
-            zielgruppe: "Arbeitssuchende",
-            mode: "Vollzeit" 
-        },
-        {
-            name: "MS-Office-zeitgemäße Bürosoftware sicher anwenden - 3 Module",
-            category: "Weiterbildung",
-            difficulty: "Berufsübergreifend",
-            startDates: ["02.01.2024", "31.01.2024",],
-            startIntervalMonths: 1,
-            length: "1 Monat = 21 Schulungstage je Modul, einzeln buchbar",
-            isFree: true,
-            detailPageUrl: "TBD",
-            flyerLink: "TBD",
-            location: "Kiel",
-            zielgruppe: "Arbeitssuchende",
-            mode: "Vollzeit" 
-        },
+    const headers = {
+        Authorization: `Bearer ${AIRTABLE_TOKEN}`
+    };
+
+    fetch(airtableUrl, { method: 'GET', headers: headers })
+        .then(response => response.json())
+        .then(data => {
+            sortAndDisplayCourses(data.records);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+        function sortAndDisplayCourses(records) {
+            records.sort((a, b) => {
+                // Extract the first date from the 'Startdaten' field for both records
+                const getFirstDate = (record) => {
+                    const datesStr = record.fields["Startdaten"] || ''; // Fallback to empty string if undefined
+                    const firstDateStr = datesStr.split(', ')[0]; // Get the first date
+                    const [day, month, year] = firstDateStr.split('.').map(Number); // Split and convert to numbers
+                    // Return a comparable date value (considering cases where date might be invalid)
+                    return new Date(year || 0, (month || 1) - 1, day || 1);
+                };
+        
+                const dateA = getFirstDate(a);
+                const dateB = getFirstDate(b);
+        
+                // Compare the dates
+                if (dateA > dateB) return 1;
+                if (dateA < dateB) return -1;
+        
+                // If dates are equal, fallback to comparing another field, e.g., 'Kursname'
+                const kursnameA = a.fields["Kursname"] || '';
+                const kursnameB = b.fields["Kursname"] || '';
+                return kursnameA.localeCompare(kursnameB);
+            });
+            displayCourses(records);
+        }
+        
         
 
-
-    ];
-
-    const locationImages = {
-        "Kiel": "Kiel.png",
-        "Rendsburg": "Rendsburg.png",
-        // Add paths for other location images
-    };
-    const locationTexts = {
-        "Kiel": "Herzlich willkommen bei TERTIA Kiel",
-        "Rendsburg": "Herzlich willkommen bei TERTIA Rendsburg",
-        // Add paths for other location images
-    };
-
-
-    function formatDate(date) {
-        const options = { month: 'long', year: 'numeric' };
-        return date.toLocaleDateString('de-DE', options);
-    }
-    
-    function generateAndFormatStartDates(startDates, intervalMonths) {
-        const today = new Date();
-        let formattedDates = [];
-    
-        // First, add explicit start dates that are in the future
-        startDates.forEach(dateStr => {
-            const date = new Date(dateStr.split(".").reverse().join("-"));
-            if (date >= today) {
-                // Add the explicit future start date formatted as DD.MM.YYYY or to month and year
-                formattedDates.push(date.getDate() === 1 ? formatDate(date) : dateStr);
-            }
-        });
-    
-        // Generate future dates based on the interval, if specified
-        if (intervalMonths > 0) {
-            let lastStartDate = new Date(startDates[startDates.length - 1].split(".").reverse().join("-"));
-            let futureDate = new Date(lastStartDate.setMonth(lastStartDate.getMonth() + intervalMonths));
-            while (futureDate.getFullYear() === today.getFullYear() || (futureDate.getFullYear() === today.getFullYear() + 1 && futureDate.getMonth() <= today.getMonth())) {
-                if (futureDate >= today) {
-                    formattedDates.push(formatDate(futureDate));
-                }
-                futureDate = new Date(futureDate.setMonth(futureDate.getMonth() + intervalMonths));
-            }
-        }
-    
-        return formattedDates;
-    }
-    
-    function displayCourses(courses) {
+    function displayCourses(records) {
         const container = document.getElementById('coursesContainer');
-        container.innerHTML = '';
-    
-        if (courses.length === 0) {
-            container.innerHTML = `<div class="no-results">Keine Kurse gefunden, die den Kriterien entsprechen.</div>`;
-            return;
-        }
-    
-        courses.forEach(course => {
-            const futureStartDates = generateAndFormatStartDates(course.startDates, course.startIntervalMonths).join(", ");
-    
-            const element = document.createElement('div');
-            element.classList.add('course-card');
-            element.innerHTML = `
-                <h2>${course.name}</h2>
-                <p>Start: ${futureStartDates || 'Keine zukünftigen Termine'}</p>
-                <p>Dauer: ${course.length}</p>
-                
-                <p>${course.mode}</p>
-                <button onclick="window.open('${course.detailPageUrl}', '_blank')">Details</button>
-                ${course.flyerLink ? `<a href="${course.flyerLink}" target="_blank" class="flyer-link">Kursflyer</a>` : ''}
-            `;
-            container.appendChild(element);
-        });
-    
-    
-    
-        updateLocationImage(); // Update location image and text based on filters
-    }
-    
-    function filterCourses() {
-        const searchQuery = document.getElementById('searchQuery').value.toLowerCase();
-        const filterCategory = document.getElementById('filterCategory').value;
-        const filterDifficulty = document.getElementById('filterDifficulty').value;
-        const filterIsFree = document.getElementById('filterIsFree').value;
-        const filterLocation = document.getElementById('filterLocation').value;
-        const filterZielgruppe = document.getElementById('filterZielgruppe').value;
-        const filterStartDateInput = document.getElementById('filterStartDate').value;
-        const filterStartDate = filterStartDateInput ? new Date(filterStartDateInput) : null;
-        const filterMode = document.getElementById('filterMode').value;
-    
-        const today = new Date();
-        today.setHours(0, 0, 0, 0); // Normalize today's date
-    
-        const filteredCourses = coursesData.filter(course => {
-            let includeCourse = false;
-    
-            // Process each start date of the course
-            course.startDates.forEach(dateStr => {
-                let courseDate = new Date(dateStr.split(".").reverse().join("-"));
-    
-                // If the course has a start interval, calculate future dates
-                if (course.startIntervalMonths > 0) {
-                    let futureDate = new Date(courseDate);
-                    while (futureDate <= today) {
-                        futureDate.setMonth(futureDate.getMonth() + course.startIntervalMonths);
-                    }
-                    courseDate = futureDate;
-                }
-    
-                if ((!filterStartDate || courseDate >= filterStartDate) && courseDate >= today) {
-                    includeCourse = true;
-                }
-            });
-    
-            // Adjusted filterMode logic to handle "Vollzeit/Teilzeit" courses
-            const courseModes = course.mode.split('/').map(mode => mode.trim());
-            const modeMatches = !filterMode || courseModes.includes(filterMode);
-    
-            // Additional filter checks
-            return includeCourse &&
-                   modeMatches &&
-                   (!searchQuery || course.name.toLowerCase().includes(searchQuery)) &&
-                   (!filterCategory || course.category === filterCategory) &&
-                   (!filterDifficulty || course.difficulty === filterDifficulty) &&
-                   (filterIsFree === "" || course.isFree === (filterIsFree === "true")) &&
-                   (!filterZielgruppe || course.zielgruppe === filterZielgruppe) &&
-                   (!filterLocation || course.location === filterLocation);
-        });
-    
-        displayCourses(filteredCourses);
-    }
-    
-    
-    
-    
-    
-    
-    
+        const countsContainer = document.getElementById('countsContainer');
+        const bildungsgutscheinFilter = document.getElementById('bildungsgutscheinToggle').checked;
+        
+        countsContainer.innerHTML = `Alle: ${records.length}`;
+    container.innerHTML = '';
 
-    function resetFilters() {
-        document.getElementById('searchQuery').value = '';
-        document.getElementById('filterCategory').selectedIndex = 0;
-        document.getElementById('filterDifficulty').selectedIndex = 0;
-        document.getElementById('filterIsFree').selectedIndex = 0;
-        document.getElementById('filterLocation').selectedIndex = 0;
-        document.getElementById('filterZielgruppe').selectedIndex = 0;
-        document.getElementById('filterStartDate').value = '';
-        document.getElementById('filterMode').selectedIndex = '0';
-        filterCourses(); // Reapply filters to reset courses display
+    let filteredRecords = records;
+
+    // Apply filter if needed
+    if (bildungsgutscheinFilter) {
+        filteredRecords = records.filter(record => record.fields["Bildungsgutschein"]);
     }
 
-    document.getElementById('searchQuery').addEventListener('input', filterCourses);
-    document.getElementById('filterCategory').addEventListener('change', filterCourses);
-    document.getElementById('filterDifficulty').addEventListener('change', filterCourses);
-    document.getElementById('filterIsFree').addEventListener('change', filterCourses);
-    document.getElementById('filterZielgruppe').addEventListener('change', filterCourses);
-    document.getElementById('filterStartDate').addEventListener('change', filterCourses);
-    document.getElementById('filterMode').addEventListener('change', filterCourses);
-    document.getElementById('filterLocation').addEventListener('change', function() {
-        filterCourses(); // Reapply filters with new location
-        updateLocationImage(); // Update the location image based on the new selection
+    // Display filtered records count
+    countsContainer.innerHTML += `  Angezeigt: <strong>${filteredRecords.length}</strong>`;
+
+    filteredRecords.forEach(record => {
+        const courseCard = createCourseCard(record);
+        container.appendChild(courseCard);
     });
-    document.getElementById('resetButton').addEventListener('click', resetFilters);
+}
 
-    function updateLocationImage() {
-        const filterLocation = document.getElementById('filterLocation').value;
-        const locationImage = document.getElementById('locationImage');
-        const locationText = document.getElementById('locationText'); // Ensure this element exists in your HTML
+ 
     
-        locationImage.src = locationImages[filterLocation] || "tertia.jpg"; // Use default image if no match
-        locationImage.alt = filterLocation || "Standard Standortbild"; // Update alt text
+function createCourseCard(record) {
+    const element = document.createElement('div');
+    element.classList.add('course-card');
     
-        // Correctly handle default text when a specific location is not selected
-        locationText.innerHTML = locationTexts[filterLocation] || "Herzlich willkommen bei TERTIA"; // Default text
+    let formattedStartDates = '';
+
+    if (record.fields["Startdaten"]) {
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0); // Normalize current date to start of day for comparison
+
+        const startDatesArray = record.fields["Startdaten"].split(', ').filter(dateStr => {
+            const [day, month, year] = dateStr.split('.').map(Number);
+            const date = new Date(year, month - 1, day);
+            return date >= currentDate; // Only include dates that are today or in the future
+        });
+
+        formattedStartDates = startDatesArray.map(dateStr => {
+            const [day, month, year] = dateStr.split('.');
+            const date = new Date(year, month - 1, day);
+            return date.toLocaleDateString('de-DE', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }).join(', ');
     }
-    
 
-    // Initial display of courses
-    displayCourses(coursesData);
+    element.innerHTML = `
+        <p>Starttermine: <strong>${formattedStartDates}</strong></p>
+        <h3 id="kursname">${record.fields["Kursname"]}</h3>
+        <p>${record.fields["Vollzeit/Teilzeit"]}</p>
+    `;
+    return element;
+}
+
+
+
+
+
+    document.getElementById('bildungsgutscheinToggle').addEventListener('change', function() {
+        fetch(airtableUrl, { method: 'GET', headers: headers })
+            .then(response => response.json())
+            .then(data => {
+                sortAndDisplayCourses(data.records);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
+
+
 });
