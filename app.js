@@ -30,6 +30,29 @@ function attachButtonEventListeners() {
 }
 
 
+document.getElementById('resetFilters').addEventListener('click', function() {
+    resetFilters();
+});
+
+function resetFilters() {
+    // Clear the search input
+    document.getElementById('suche').value = '';
+
+    // Reset the "Bildungsgutschein" toggle to its default state
+    // Assuming the default state is unchecked
+    document.getElementById('bildungsgutscheinToggle').checked = false;
+
+    // Select the "Alle Berufsgruppen" button and apply it as the active filter
+    const buttons = document.querySelectorAll(".button-container button");
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    const alleBerufsgruppenBtn = document.querySelector(".button-container button:first-child"); // Assuming the first button is "Alle Berufsgruppen"
+    alleBerufsgruppenBtn.classList.add('selected');
+    selectedCategory = "Alle Berufsgruppen"; // Update the selectedCategory variable
+
+    // Re-filter and display courses based on the reset filters
+    filterAndDisplayCourses();
+}
+
 function filterAndDisplayCourses() {
     const searchQuery = document.getElementById('suche').value.toLowerCase();
     const bildungsgutscheinToggle = document.getElementById('bildungsgutscheinToggle').checked;
