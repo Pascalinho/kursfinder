@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let filteredRecords = records.filter(record => !bildungsgutscheinFilter || record["Bildungsgutschein"] === "checked");
 
-        countsContainer.innerHTML += `  Angezeigt: <strong>${filteredRecords.length}</strong>`;
+        countsContainer.innerHTML += `  Angezeigt: <strong style="color:blue;">${filteredRecords.length}</strong>`;
 
         filteredRecords.forEach(record => {
             const courseCard = createCourseCard(record);
