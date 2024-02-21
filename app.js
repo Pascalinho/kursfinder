@@ -29,6 +29,10 @@ function attachButtonEventListeners() {
     });
 }
 
+document.getElementById('sortingOption').addEventListener('change', function() {
+    filterAndDisplayCourses(); // This will now consider the current sorting option
+});
+
 
 document.getElementById('resetFilters').addEventListener('click', function() {
     resetFilters();
@@ -75,9 +79,20 @@ function filterAndDisplayCourses() {
     }
 
     function sortAndDisplayCourses(records) {
-        records.sort((a, b) => compareDatesAndNames(a, b));
+        const sortingOption = document.getElementById('sortingOption').value;
+    
+        if (sortingOption === "az") {
+            records.sort((a, b) => a["Kursname"].localeCompare(b["Kursname"], 'de-DE'));
+        } else if (sortingOption === "za") {
+            records.sort((a, b) => b["Kursname"].localeCompare(a["Kursname"], 'de-DE'));
+        } else {
+            // Default to sorting by date
+            records.sort((a, b) => compareDatesAndNames(a, b));
+        }
+    
         displayCourses(records);
     }
+    
 
     function displayCourses(records) {
         const container = document.getElementById('coursesContainer');
