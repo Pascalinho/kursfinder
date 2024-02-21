@@ -34,39 +34,83 @@ document.getElementById('sortingOption').addEventListener('change', function() {
 });
 
 
+document.querySelectorAll('.measure-checkbox, .attendance-checkbox, #earliestStartDate').forEach(input => {
+    input.addEventListener('change', filterAndDisplayCourses);
+});
+
+
 document.getElementById('resetFilters').addEventListener('click', function() {
     resetFilters();
 });
 
 function resetFilters() {
-    // Clear the search input
     document.getElementById('suche').value = '';
-
-    // Reset the "Bildungsgutschein" toggle to its default state
-    // Assuming the default state is unchecked
     document.getElementById('bildungsgutscheinToggle').checked = false;
+    document.getElementById('earliestStartDate').value = '';
 
-    // Select the "Alle Berufsgruppen" button and apply it as the active filter
-    const buttons = document.querySelectorAll(".button-container button");
-    buttons.forEach(btn => btn.classList.remove('selected'));
-    const alleBerufsgruppenBtn = document.querySelector(".button-container button:first-child"); // Assuming the first button is "Alle Berufsgruppen"
-    alleBerufsgruppenBtn.classList.add('selected');
-    selectedCategory = "Alle Berufsgruppen"; // Update the selectedCategory variable
+    // Reset all checkboxes for both groups
+    document.querySelectorAll('.measure-checkbox, .attendance-checkbox').forEach(checkbox => {
+        checkbox.checked = false;
+    });
 
-    // Re-filter and display courses based on the reset filters
+    selectedCategory = "Alle Berufsgruppen";
+
+    document.querySelector(".button-container button:first-child").click();
+    
     filterAndDisplayCourses();
 }
+
 
 function filterAndDisplayCourses() {
     const searchQuery = document.getElementById('suche').value.toLowerCase();
     const bildungsgutscheinToggle = document.getElementById('bildungsgutscheinToggle').checked;
+    const earliestStartDate = document.getElementById('earliestStartDate').value;
+    const currentDate = new Date();
+
+    // Gather checked states for "Maßnahme"
+    const measures = ['Coaching', 'Weiterbildung', 'Reha'].filter(measure => 
+        document.getElementById(`${measure.toLowerCase()}Checkbox`).checked
+    );
+
+    // Gather checked states for "Vollzeit/Teilzeit"
+    const attendanceTypes = [];
+if (document.getElementById('vzCheckbox').checked) {
+    attendanceTypes.push('Vollzeit', 'Vollzeit/Teilzeit'); // Include "Vollzeit/Teilzeit" for "Vollzeit"
+}
+if (document.getElementById('tzCheckbox').checked) {
+    attendanceTypes.push('Teilzeit', 'Vollzeit/Teilzeit'); // Also include "Vollzeit/Teilzeit" for "Teilzeit"
+}
+if (document.getElementById('indiCheckbox').checked) {
+    attendanceTypes.push('Individuell');
+}
+
 
     const filteredRecords = globalRecords.filter(record => {
         const matchesSearch = record["Kursname"].toLowerCase().includes(searchQuery);
         const matchesBildungsgutschein = !bildungsgutscheinToggle || record["Bildungsgutschein"] === "true";
         const matchesCategory = selectedCategory === "Alle Berufsgruppen" || record["Category"] === selectedCategory;
-        return matchesSearch && matchesBildungsgutschein && matchesCategory;
+        
+        const startDate = new Date(record["Startdaten"].split(', ')[0]); // Assuming multiple start dates, take the first
+        const matchesStartDate = record["Startdaten"].split(', ')
+    .map(dateStr => {
+        const [day, month, year] = dateStr.split('.').map(Number);
+        return new Date(year, month - 1, day);
+    })
+    .some(date => date >= currentDate && (!earliestStartDate || date >= new Date(earliestStartDate)));
+
+
+        const matchesMeasure = !measures.length || measures.includes(record["Maßnahme"]);
+        const isVollzeit = document.getElementById('vzCheckbox').checked && (record["Vollzeit/Teilzeit"].includes("Vollzeit") || record["Vollzeit/Teilzeit"] === "Vollzeit/Teilzeit");
+        const isTeilzeit = document.getElementById('tzCheckbox').checked && (record["Vollzeit/Teilzeit"].includes("Teilzeit") || record["Vollzeit/Teilzeit"] === "Vollzeit/Teilzeit");
+        const isIndividuell = document.getElementById('indiCheckbox').checked && record["Vollzeit/Teilzeit"].includes("Individuell");
+        
+        // Ensuring that the course matches any of the checked conditions
+        const matchesAttendanceType = attendanceTypes.length === 0 || attendanceTypes.some(type => record["Vollzeit/Teilzeit"].includes(type));
+
+    
+        return matchesSearch && matchesBildungsgutschein && matchesCategory && matchesStartDate && matchesMeasure && matchesAttendanceType;
     });
+   
 
     sortAndDisplayCourses(filteredRecords);
     updateCourseCounts(globalRecords.length, filteredRecords.length);
@@ -89,7 +133,7 @@ function filterAndDisplayCourses() {
             // Default to sorting by date
             records.sort((a, b) => compareDatesAndNames(a, b));
         }
-    
+        
         displayCourses(records);
     }
     
