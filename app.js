@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     const jsonDataUrl = 'courses.json';
-    let globalRecords = []; // Store the fetched records globally
+    const urlsDataUrl = 'urlsByCourseAndLocation.json';
+    let globalRecords = [];
+    let urlsByCourseAndLocation = {};
 
     fetch(jsonDataUrl)
         .then(response => response.json())
@@ -9,6 +11,15 @@ document.addEventListener("DOMContentLoaded", function() {
             filterAndDisplayCourses(); // Initial display with filters applied
         })
         .catch(error => console.error('Error fetching data:', error));
+
+        fetch(urlsDataUrl)
+        .then(response => response.json())
+        .then(data => {
+            urlsByCourseAndLocation = data; // Save fetched URLs globally
+        })
+        .catch(error => console.error('Error fetching URLs data:', error));
+
+
 
     document.getElementById('suche').addEventListener('input', filterAndDisplayCourses);
     document.getElementById('bildungsgutscheinToggle').addEventListener('change', filterAndDisplayCourses);
@@ -43,10 +54,36 @@ document.getElementById('resetFilters').addEventListener('click', function() {
     resetFilters();
 });
 
+let selectedLocation = "Alle Standorte"; // Default
+
+document.getElementById('locationSelect').addEventListener('change', function() {
+    selectedLocation = this.value;
+    filterAndDisplayCourses(); // Re-filter courses to update URLs
+});
+
+document.getElementById('locationSelect').addEventListener('change', function() {
+    // Update selectedLocation, re-filter courses, and update contact info
+    selectedLocation = this.value;
+    updateContactInfo(selectedLocation); // New function to update and show contact info
+    filterAndDisplayCourses();
+});
+
+function updateContactInfo(location) {
+    const contactInfoDiv = document.getElementById('contactInfo');
+    if (location !== "Alle Standorte") {
+        // Populate contactInfoDiv based on selectedLocation
+        contactInfoDiv.style.display = 'block';
+    } else {
+        contactInfoDiv.style.display = 'none';
+    }
+}
+
+
 function resetFilters() {
     document.getElementById('suche').value = '';
     document.getElementById('bildungsgutscheinToggle').checked = false;
     document.getElementById('earliestStartDate').value = '';
+    document.getElementById('sortingOption').value = 'date'
 
     // Reset all checkboxes for both groups
     document.querySelectorAll('.measure-checkbox, .attendance-checkbox').forEach(checkbox => {
@@ -56,7 +93,15 @@ function resetFilters() {
     selectedCategory = "Alle Berufsgruppen";
 
     document.querySelector(".button-container button:first-child").click();
-    
+
+    document.getElementById('locationSelect').value = 'Alle Standorte';
+    selectedLocation = "Alle Standorte";
+
+    const contactInfoDiv = document.getElementById('contactInfo');
+    if(contactInfoDiv) {
+        contactInfoDiv.style.display = 'none';
+    }
+
     filterAndDisplayCourses();
 }
 
@@ -147,17 +192,27 @@ if (document.getElementById('indiCheckbox').checked) {
             container.appendChild(courseCard);
         });
     }
-
     function createCourseCard(record) {
         const element = document.createElement('div');
         element.classList.add('course-card');
 
-        // Generate dates and toggle state handling
         const futureDates = getFutureDates(record["Startdaten"]);
-        element.appendChild(generateCourseCardContent(record, futureDates.slice(0, 3), futureDates));
+        let detailUrl = record["Url"]; // Fallback URL
+
+        // Assuming your location select element has an id of "locationSelect"
+        const selectedLocation = document.getElementById('locationSelect').value;
+        const courseName = record["Kursname"]; // Adjust if necessary to match keys in urlsByCourseAndLocation
+
+        // Check if a specific URL is defined for the selected location and course
+        if (selectedLocation !== "Alle Standorte" && urlsByCourseAndLocation[courseName] && urlsByCourseAndLocation[courseName][selectedLocation]) {
+            detailUrl = urlsByCourseAndLocation[courseName][selectedLocation];
+        }
+
+        element.appendChild(generateCourseCardContent(record, futureDates.slice(0, 3), futureDates, detailUrl));
 
         return element;
     }
+    
 
     function getFutureDates(datesStr) {
         const currentDate = new Date();
@@ -169,12 +224,12 @@ if (document.getElementById('indiCheckbox').checked) {
         });
     }
 
-    function generateCourseCardContent(record, initialDates, allDates) {
+    function generateCourseCardContent(record, initialDates, allDates, detailUrl) {
         const content = document.createElement('div');
-
+    
         const formattedStartDates = initialDates.map(dateStr => formatDate(dateStr)).join(', ');
         const moreDatesAvailable = allDates.length > initialDates.length;
-
+    
         content.innerHTML = `
             <p>Starttermine: <strong>${formattedStartDates}</strong>${moreDatesAvailable ? ' <span class="toggle-dates">+ weitere Termine</span>' : ''}</p>
             <h3>${record["Kursname"]}</h3>
@@ -183,16 +238,17 @@ if (document.getElementById('indiCheckbox').checked) {
                 <p><i class="fas fa-book"></i> ${record["Maßnahme"]}</p>
                 <p><i class="fas fa-coins"></i> ${record["Finanzierung"]}</p>
             </div>
-            <button type="button" class="btn btn-secondary details-btn" onclick="window.open('${record["Url"]}', '_blank')">Details</button>
+            <button type="button" class="btn btn-secondary details-btn" onclick="window.open('${detailUrl}', '_blank')">Details</button>
         `;
-
+    
         if (moreDatesAvailable) {
             const toggleDatesSpan = content.querySelector('.toggle-dates');
             toggleDatesSpan.onclick = () => toggleDates(content, record, allDates);
         }
-
+    
         return content;
     }
+    
 
     function toggleDates(content, record, allDates) {
         const datesDisplay = content.querySelector('p > strong');

@@ -71,8 +71,8 @@
 
               <div>
                 <label for="exampleFormControlInput1" class="form-label">Standort wählen</label>
-                <select class="form-select">
-                  <option selected>Alle Standorte</option>
+                <select class="form-select" id="locationSelect">
+                  <option id="Alle Standorte"selected>Alle Standorte</option>
                   <option value="Aachen">Aachen</option>
                   <option value="Kiel">Kiel</option>
                 </select>
@@ -156,5 +156,10 @@
     </div>
 
     <script src="app.js"></script>
+    <div id="contactInfo" style="display: none; position: fixed; bottom: 0; width: 100%; background: #f8f9fa;">
+      <p>Contact Info Here</p>
+      <!-- Include more details and link to contact form -->
+    </div>
+    
 </body>
 </html>
