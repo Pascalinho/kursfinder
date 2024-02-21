@@ -112,18 +112,22 @@ function resetFilters() {
 
     filterAndDisplayCourses();
 }
-
+const measuresMapping = {
+    'Coaching': 'coachingCheckbox',
+    'Weiterbildung': 'weiterbildungCheckbox',
+    'Rehabilitation und Integration': 'rehaCheckbox',
+};
 
 function filterAndDisplayCourses() {
     const searchQuery = document.getElementById('suche').value.toLowerCase();
     const bildungsgutscheinToggle = document.getElementById('bildungsgutscheinToggle').checked;
     const earliestStartDate = document.getElementById('earliestStartDate').value;
     const currentDate = new Date();
-
-    // Gather checked states for "Maßnahme"
-    const measures = ['Coaching', 'Weiterbildung', 'Reha'].filter(measure => 
-        document.getElementById(`${measure.toLowerCase()}Checkbox`).checked
-    );
+    const measures = Object.keys(measuresMapping).filter(measureText => {
+        const checkboxId = measuresMapping[measureText];
+        const checkboxElement = document.getElementById(checkboxId);
+        return checkboxElement && checkboxElement.checked;
+    });
 
     // Gather checked states for "Vollzeit/Teilzeit"
     const attendanceTypes = [];
