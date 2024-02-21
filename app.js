@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     const jsonDataUrl = 'courses.json';
     const urlsDataUrl = 'urlsByCourseAndLocation.json';
+    const contactInfoUrl = 'contactInfoByLocation.json'
     let globalRecords = [];
     let urlsByCourseAndLocation = {};
+    let contactInfoByLocation = {}; 
 
     fetch(jsonDataUrl)
         .then(response => response.json())
@@ -19,6 +21,15 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error('Error fetching URLs data:', error));
 
+
+        fetch(contactInfoUrl)
+        .then(response => response.json())
+        .then(data => {
+            contactInfoByLocation = data;
+            // Call updateContactInfo here to ensure it has data to work with
+            updateContactInfo(document.getElementById('locationSelect').value);
+        })
+        .catch(error => console.error('Error fetching contact info:', error));
 
 
     document.getElementById('suche').addEventListener('input', filterAndDisplayCourses);
@@ -59,19 +70,16 @@ let selectedLocation = "Alle Standorte"; // Default
 document.getElementById('locationSelect').addEventListener('change', function() {
     selectedLocation = this.value;
     filterAndDisplayCourses(); // Re-filter courses to update URLs
+    updateContactInfo(selectedLocation);
 });
 
-document.getElementById('locationSelect').addEventListener('change', function() {
-    // Update selectedLocation, re-filter courses, and update contact info
-    selectedLocation = this.value;
-    updateContactInfo(selectedLocation); // New function to update and show contact info
-    filterAndDisplayCourses();
-});
+
 
 function updateContactInfo(location) {
     const contactInfoDiv = document.getElementById('contactInfo');
-    if (location !== "Alle Standorte") {
-        // Populate contactInfoDiv based on selectedLocation
+    if (location !== "Alle Standorte" && contactInfoByLocation[location]) {
+        const info = contactInfoByLocation[location];
+        contactInfoDiv.innerHTML = `  <p><strong>${info.kontakt}</strong></br>${info.address}</p><p>${info.phone}</p><a href="${info.contactFormUrl}">Termin buchen</a>`;
         contactInfoDiv.style.display = 'block';
     } else {
         contactInfoDiv.style.display = 'none';

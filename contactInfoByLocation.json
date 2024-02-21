@@ -1,0 +1,15 @@
+{
+    "Aachen": {
+        "kontakt": "Frau Marianne Brinker",
+      "address": "Jülicher Straße 334, 52070 Aachen",
+      "phone": "+49 241 189268-0",
+      "contactFormUrl": "https://www.terminland.de/tertia/online/aachen1/"
+    },
+    "Kiel": {
+    "kontakt": "Frau Susan Bertram",
+       "address": "Alter Markt 12,24103 Kiel" ,
+      "phone": "+49 431 9828108-0",
+      "contactFormUrl": "https://www.terminland.de/tertia/online/kiel/"
+    }
+  }
+  

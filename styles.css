@@ -63,8 +63,21 @@ text-decoration: underline;
   flex: 0 0 300px; /* flex-grow | flex-shrink | flex-basis */
   border-right: 1px solid #ccc;
   padding-right: 1em;
+  padding-left:1em;
   box-sizing: border-box;
   overflow-y: auto;
+}
+
+#contactInfo {
+  position: fixed;
+  bottom: 0;
+  width: 300px; /* Match the sidebar width */
+  background: #f8f9fa;
+  padding: 20px 20px 40px 20px;
+  
+  z-index: 10; /* Ensure it's above other content */
+  border:1px solid #ccc;
+  border-radius:4px;
 }
 
 .filter-group {
