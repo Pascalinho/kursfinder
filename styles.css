@@ -184,7 +184,7 @@ text-decoration: underline;
   
   /* Added styles for the label */
   label {
-    margin-left: 10px;
+    
     font-weight: bold;
   }
   
@@ -195,7 +195,7 @@ text-decoration: underline;
     grid-gap: 5px;
     grid-template-rows: repeat(2, auto);
     grid-template-columns: repeat(7, auto);
-    padding: 20px 0 20px 0;
+    padding: 20px 0 20px 1em;
     
   }
 

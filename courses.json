@@ -8,7 +8,8 @@
       "Maßnahme": "Coaching",
       "Finanzierung": "Agentur für Arbeit, Jobcenter",
       "Url": "https://www.tertia.de/tobi_ms-office/",
-      "Category": "Gastronomie"
+      "Category": "Gastronomie",
+      "Art": "Online"
     },
     {
       "Kursname": "MS Office Modul 2",
@@ -19,7 +20,8 @@
       "Maßnahme": "Rehabilitation und Integration",
       "Finanzierung": "Agentur für Arbeit, Jobcenter",
       "Url": "https://www.tertia.de/tobi_ms-office/",
-      "Category": "Gastronomie"
+      "Category": "Gastronomie",
+      "Art": "Präsenz"
     },
     {
       "Kursname": "MS Office Modul 3",
@@ -30,7 +32,8 @@
       "Maßnahme": "Weiterbildung",
       "Finanzierung": "Agentur für Arbeit, Jobcenter",
       "Url": "https://www.tertia.de/tobi_ms-office/",
-      "Category": "Anlagenmechanik"
+      "Category": "Anlagenmechanik",
+      "Art": "Präsenz"
     },
     {
       "Kursname": "Digitaler Führerschein 4.0",
@@ -41,6 +44,7 @@
       "Maßnahme": "Weiterbildung",
       "Finanzierung": "Agentur für Arbeit, Jobcenter",
       "Url": "https://www.tertia.de/tobi_digi_fs/",
-      "Category": "Einzelhandel"
+      "Category": "Einzelhandel",
+      "Art": "Präsenz"
     }
   ]

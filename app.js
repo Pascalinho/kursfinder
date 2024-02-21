@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function() {
             filterAndDisplayCourses(); // Initial display with filters applied
         })
         .catch(error => console.error('Error fetching data:', error));
-
         fetch(urlsDataUrl)
         .then(response => response.json())
         .then(data => {
@@ -36,6 +35,11 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('bildungsgutscheinToggle').addEventListener('change', filterAndDisplayCourses);
 
     let selectedCategory = "Alle Berufsgruppen"; // Default category
+
+    document.querySelectorAll('.art-checkbox').forEach(input => {
+        input.addEventListener('change', filterAndDisplayCourses);
+    });
+    
 
     
 function attachButtonEventListeners() {
@@ -105,6 +109,10 @@ function resetFilters() {
     document.getElementById('locationSelect').value = 'Alle Standorte';
     selectedLocation = "Alle Standorte";
 
+    document.querySelectorAll('.art-checkbox').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+
     const contactInfoDiv = document.getElementById('contactInfo');
     if(contactInfoDiv) {
         contactInfoDiv.style.display = 'none';
@@ -123,6 +131,9 @@ function filterAndDisplayCourses() {
     const bildungsgutscheinToggle = document.getElementById('bildungsgutscheinToggle').checked;
     const earliestStartDate = document.getElementById('earliestStartDate').value;
     const currentDate = new Date();
+    const artTypes = [];
+    if (document.getElementById('prasenzCheckbox').checked) artTypes.push('Präsenz');
+    if (document.getElementById('onlineCheckbox').checked) artTypes.push('Online');
     const measures = Object.keys(measuresMapping).filter(measureText => {
         const checkboxId = measuresMapping[measureText];
         const checkboxElement = document.getElementById(checkboxId);
@@ -163,9 +174,9 @@ if (document.getElementById('indiCheckbox').checked) {
         
         // Ensuring that the course matches any of the checked conditions
         const matchesAttendanceType = attendanceTypes.length === 0 || attendanceTypes.some(type => record["Vollzeit/Teilzeit"].includes(type));
-
-    
-        return matchesSearch && matchesBildungsgutschein && matchesCategory && matchesStartDate && matchesMeasure && matchesAttendanceType;
+        const matchesArt = artTypes.length === 0 || artTypes.includes(record["Art"]);
+        
+        return matchesSearch && matchesBildungsgutschein && matchesCategory && matchesStartDate && matchesMeasure && matchesAttendanceType && matchesArt;
     });
    
 
@@ -241,10 +252,17 @@ if (document.getElementById('indiCheckbox').checked) {
     
         const formattedStartDates = initialDates.map(dateStr => formatDate(dateStr)).join(', ');
         const moreDatesAvailable = allDates.length > initialDates.length;
+
+        let iconHtml = '';
+    if (record["Art"] === "Präsenz") {
+        iconHtml = '<i class="fas fa-chalkboard-teacher"></i>'; // Icon for in-person
+    } else if (record["Art"] === "Online") {
+        iconHtml = '<i class="fas fa-laptop"></i>'; // Icon for online
+    }
     
         content.innerHTML = `
             <p>Starttermine: <strong>${formattedStartDates}</strong>${moreDatesAvailable ? ' <span class="toggle-dates">+ weitere Termine</span>' : ''}</p>
-            <h3>${record["Kursname"]}</h3>
+            <h3>${record["Kursname"]} <span style="font-size: 16px;">${iconHtml}</span></h3>
             <div style="display:flex; gap:20px; padding-top:10px;">
                 <p><i class="fas fa-clock"></i> ${record["Vollzeit/Teilzeit"]}</p>
                 <p><i class="fas fa-book"></i> ${record["Maßnahme"]}</p>
