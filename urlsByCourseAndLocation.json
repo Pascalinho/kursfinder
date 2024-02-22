@@ -1,21 +1,28 @@
 {
     "MS Office Modul 1": {
-      "Aachen": "aachen-1.html",
-      "Kiel": "kiel-1.html"
+      "Aachen": "https://www.tertia.de/massnahmen/ms-office-zeitgemase-burosoftware-sicher-anwenden/",
+      "Kiel": "https://www.tertia.de/massnahmen/ms-office-zeitgemase-burosoftware-sicher-anwenden-90/"
     },
     "MS Office Modul 2": {
-      "Aachen": "aachen-2.html",
-      "Kiel": "kiel-2.html"
+      "Aachen": "https://www.tertia.de/massnahmen/ms-office-zeitgemase-burosoftware-sicher-anwenden/",
+      "Kiel": "https://www.tertia.de/massnahmen/ms-office-zeitgemase-burosoftware-sicher-anwenden-90/"
     },
     "MS Office Modul 3": {
-        "Aachen": "aachen-3.html",
-        "Kiel": "kiel-3.html"
+        "Aachen": "https://www.tertia.de/massnahmen/ms-office-zeitgemase-burosoftware-sicher-anwenden/",
+        "Kiel": "https://www.tertia.de/massnahmen/ms-office-zeitgemase-burosoftware-sicher-anwenden-90/"
       },
       "Digitaler Führerschein 4.0": {
-        "Aachen": "aachen-4.html",
-        "Kiel": "kiel-4.html"
+        "Aachen": "https://www.tertia.de/massnahmen/digitaler-fuhrerschein-vermittlung-von-digitalen-grundkompetenzen-vz-und-tz/",
+        "Kiel": "https://www.tertia.de/massnahmen/digitaler-fuhrerschein-vermittlung-von-digitalen-grundkompetenzen-vz-und-tz-32/"
+      },
+      "Sprache - Deutsch für den Beruf": {
+        "Aachen": "https://www.tertia.de/massnahmen/sprache-deutsch-fur-den-beruf/",
+        "Kiel": "https://www.tertia.de/massnahmen/sprache-deutsch-fur-den-beruf-67/"
+      },
+      "Hauswirtschaftliche Versorgungskraft": {
+        "Aachen": "https://www.tertia.de/massnahmen/hauswirtschaftliche-versorgungskraft/",
+        "Kiel": "https://www.tertia.de/massnahmen/hauswirtschaftliche-versorgungskraft-33/"
       }
-
 
 
 

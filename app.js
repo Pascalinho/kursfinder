@@ -131,58 +131,53 @@ function filterAndDisplayCourses() {
     const bildungsgutscheinToggle = document.getElementById('bildungsgutscheinToggle').checked;
     const earliestStartDate = document.getElementById('earliestStartDate').value;
     const currentDate = new Date();
+    const selectedLocation = document.getElementById('locationSelect').value; // Get the selected location from the dropdown
+
+    // Define your arrays for filtering based on checkboxes
     const artTypes = [];
     if (document.getElementById('prasenzCheckbox').checked) artTypes.push('Präsenz');
     if (document.getElementById('onlineCheckbox').checked) artTypes.push('Online');
+
     const measures = Object.keys(measuresMapping).filter(measureText => {
-        const checkboxId = measuresMapping[measureText];
-        const checkboxElement = document.getElementById(checkboxId);
-        return checkboxElement && checkboxElement.checked;
+        return document.getElementById(measuresMapping[measureText]).checked;
     });
 
-    // Gather checked states for "Vollzeit/Teilzeit"
     const attendanceTypes = [];
-if (document.getElementById('vzCheckbox').checked) {
-    attendanceTypes.push('Vollzeit', 'Vollzeit/Teilzeit'); // Include "Vollzeit/Teilzeit" for "Vollzeit"
-}
-if (document.getElementById('tzCheckbox').checked) {
-    attendanceTypes.push('Teilzeit', 'Vollzeit/Teilzeit'); // Also include "Vollzeit/Teilzeit" for "Teilzeit"
-}
-if (document.getElementById('indiCheckbox').checked) {
-    attendanceTypes.push('Individuell');
-}
+    if (document.getElementById('vzCheckbox').checked) attendanceTypes.push('Vollzeit', 'Vollzeit/Teilzeit');
+    if (document.getElementById('tzCheckbox').checked) attendanceTypes.push('Teilzeit', 'Vollzeit/Teilzeit');
+    if (document.getElementById('indiCheckbox').checked) attendanceTypes.push('Individuell');
 
-
+    // Now filter the globalRecords based on the selected filters
     const filteredRecords = globalRecords.filter(record => {
         const matchesSearch = record["Kursname"].toLowerCase().includes(searchQuery);
         const matchesBildungsgutschein = !bildungsgutscheinToggle || record["Bildungsgutschein"] === "true";
         const matchesCategory = selectedCategory === "Alle Berufsgruppen" || record["Category"] === selectedCategory;
-        
-        const startDate = new Date(record["Startdaten"].split(', ')[0]); // Assuming multiple start dates, take the first
-        const matchesStartDate = record["Startdaten"].split(', ')
-    .map(dateStr => {
-        const [day, month, year] = dateStr.split('.').map(Number);
-        return new Date(year, month - 1, day);
-    })
-    .some(date => date >= currentDate && (!earliestStartDate || date >= new Date(earliestStartDate)));
 
+        // Added: Location filter logic
+        const matchesLocation = selectedLocation === "Alle Standorte" || record["Standort"].includes(selectedLocation);
+
+        const matchesStartDate = record["Startdaten"] === "Nach Absprache" || 
+            record["Startdaten"].split(', ').some(dateStr => {
+                if (dateStr === "Nach Absprache") {
+                    return true;
+                }
+                const dateParts = dateStr.split('.');
+                const date = dateParts.length === 3 ? new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]) : null;
+                return date && date >= currentDate && (!earliestStartDate || date >= new Date(earliestStartDate));
+            });
 
         const matchesMeasure = !measures.length || measures.includes(record["Maßnahme"]);
-        const isVollzeit = document.getElementById('vzCheckbox').checked && (record["Vollzeit/Teilzeit"].includes("Vollzeit") || record["Vollzeit/Teilzeit"] === "Vollzeit/Teilzeit");
-        const isTeilzeit = document.getElementById('tzCheckbox').checked && (record["Vollzeit/Teilzeit"].includes("Teilzeit") || record["Vollzeit/Teilzeit"] === "Vollzeit/Teilzeit");
-        const isIndividuell = document.getElementById('indiCheckbox').checked && record["Vollzeit/Teilzeit"].includes("Individuell");
-        
-        // Ensuring that the course matches any of the checked conditions
         const matchesAttendanceType = attendanceTypes.length === 0 || attendanceTypes.some(type => record["Vollzeit/Teilzeit"].includes(type));
         const matchesArt = artTypes.length === 0 || artTypes.includes(record["Art"]);
-        
-        return matchesSearch && matchesBildungsgutschein && matchesCategory && matchesStartDate && matchesMeasure && matchesAttendanceType && matchesArt;
+
+        return matchesSearch && matchesBildungsgutschein && matchesCategory && matchesLocation && matchesStartDate && matchesMeasure && matchesAttendanceType && matchesArt;
     });
-   
 
     sortAndDisplayCourses(filteredRecords);
     updateCourseCounts(globalRecords.length, filteredRecords.length);
 }
+
+
 
 
     function updateCourseCounts(total, filtered) {
@@ -249,8 +244,8 @@ if (document.getElementById('indiCheckbox').checked) {
 
     function generateCourseCardContent(record, initialDates, allDates, detailUrl) {
         const content = document.createElement('div');
-    
-        const formattedStartDates = initialDates.map(dateStr => formatDate(dateStr)).join(', ');
+        const hasNachAbsprache = record["Startdaten"].includes("Nach Absprache");
+        const formattedStartDates = hasNachAbsprache ? "Nach Absprache" : initialDates.map(dateStr => formatDate(dateStr)).join(', ');
         const moreDatesAvailable = allDates.length > initialDates.length;
 
         let iconHtml = '';
