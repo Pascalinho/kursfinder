@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const jsonDataUrl = 'courses.json';
-    const urlsDataUrl = 'urlsByCourseAndLocation.json';
+    
     const contactInfoUrl = 'contactInfoByLocation.json'
     let globalRecords = [];
     let urlsByCourseAndLocation = {};
@@ -12,13 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
             globalRecords = data; // Save fetched records globally
             filterAndDisplayCourses(); // Initial display with filters applied
         })
-        .catch(error => console.error('Error fetching data:', error));
-        fetch(urlsDataUrl)
-        .then(response => response.json())
-        .then(data => {
-            urlsByCourseAndLocation = data; // Save fetched URLs globally
-        })
-        .catch(error => console.error('Error fetching URLs data:', error));
+        
 
 
         fetch(contactInfoUrl)
@@ -257,7 +251,7 @@ function filterAndDisplayCourses() {
     
         content.innerHTML = `
             <p>Starttermine: <strong>${formattedStartDates}</strong>${moreDatesAvailable ? ' <span class="toggle-dates">+ weitere Termine</span>' : ''}</p>
-            <h3>${record["Kursname"]} <span style="font-size: 16px;">${iconHtml}</span></h3>
+            <h3 class="card-text">${record["Kursname"]} <span style="font-size: 16px;">${iconHtml}</span></h3>
             <div style="display:flex; gap:20px; padding-top:10px;">
                 <p><i class="fas fa-clock"></i> ${record["Vollzeit/Teilzeit"]}</p>
                 <p><i class="fas fa-book"></i> ${record["Maßnahme"]}</p>
@@ -357,3 +351,7 @@ function attachButtonEventListeners() {
         });
     });
 }
+
+document.getElementById('sidebarToggle').addEventListener('click', function() {
+    document.querySelector('.filter-sidebar').classList.toggle('active');
+});

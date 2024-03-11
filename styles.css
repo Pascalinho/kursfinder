@@ -18,10 +18,14 @@ text-decoration: underline;
   display: flex;
   justify-content: space-between;
   align-items: center;  
-  padding: 10px 20px;
+  padding: 10px;
   width:1080px;
   margin:auto;
  
+}
+
+ul{
+  margin-bottom:0rem!important;
 }
 
 .logo-container img {
@@ -32,10 +36,12 @@ text-decoration: underline;
   list-style: none;
   display: flex;
   gap: 20px; /* Adjust the space between menu items */
-}
+  }
 
 .main-nav ul li {
   padding: 10px 0;
+  font-family: "Mulish", sans-serif;
+  font-size:16px;
 
 }
 
@@ -114,7 +120,16 @@ text-decoration: underline;
     border-radius: 4px;
     width:100%;
     min-height:200px;
+    
 }
+
+.card-text {
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Ensures that any overflow text is hidden */
+  text-overflow: ellipsis; /* Adds an ellipsis (...) at the end of the text if it overflows */
+  max-width:700px;
+}
+
 
 .toggle-dates {
   cursor: pointer;
