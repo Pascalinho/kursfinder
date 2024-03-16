@@ -4,6 +4,57 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
+.search-container1 {
+  display: flex;
+  justify-content: flex-start; /* Align children to the left */
+  align-items: center;
+  position: relative;
+  width: 50%; /* Or whatever width suits your design */
+  margin: auto; /* Keep the container centered */
+  padding-bottom: 15px;
+  gap: 10px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px; /* Align it to the left inside the search container */
+}
+
+.search-input {
+  padding-left: 50px; /* Adjust as needed to accommodate the icon */
+  width: 100%; /* Make input take full width of its container */
+  padding: 20px 20px 20px 50px; /* Adjust left padding to accommodate icon */
+  border-radius: 20px;
+  border: 1px solid black;
+  font-size: 24px;
+}
+
+
+
+#oben {
+  background-image: url("bild2.jpg");
+  height: 400px;
+  display: flex;
+  justify-content: center; /* Center children horizontally */
+  align-items: center; /* Center children vertically */
+}
+
+
+#top {
+  width: 80%; /* Adjust based on your design */
+  margin: auto;
+  text-align: center;
+  
+  color: white;
+}
+
+
+h1{
+  font-size:60px!important;
+  text-shadow: black 2px 2px;
+}
+
+
 h3 {
     font-size:18px;
 }
@@ -29,7 +80,7 @@ ul{
 }
 
 .logo-container img {
-  height: 48px; /* Adjust as needed */
+  height: 40px; /* Adjust as needed */
 }
 
 .main-nav ul {
