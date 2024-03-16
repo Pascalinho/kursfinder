@@ -32,7 +32,7 @@ body, html {
 
 
 #oben {
-  background-image: url("bild2.jpg");
+  background-image: url("Bild2.jpg");
   height: 400px;
   display: flex;
   justify-content: center; /* Center children horizontally */
