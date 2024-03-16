@@ -9,26 +9,43 @@ body, html {
   justify-content: flex-start; /* Align children to the left */
   align-items: center;
   position: relative;
-  width: 50%; /* Or whatever width suits your design */
+  width: 30%; /* Or whatever width suits your design */
   margin: auto; /* Keep the container centered */
-  padding-bottom: 15px;
-  gap: 10px;
+  padding: 15px 0;
+  
 }
 
 .search-icon {
   position: absolute;
-  left: 10px; /* Align it to the left inside the search container */
+  left: 20px; /* Align it to the left inside the search container */
+  max-height:28px;
 }
 
 .search-input {
   padding-left: 50px; /* Adjust as needed to accommodate the icon */
   width: 100%; /* Make input take full width of its container */
-  padding: 20px 20px 20px 50px; /* Adjust left padding to accommodate icon */
-  border-radius: 12px;
-  border: 1px solid black;
+  padding: 5px 5px 5px 80px; /* Adjust left padding to accommodate icon */
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
   font-size: 24px;
+  color:black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.search-input::placeholder {
+  color: grey;
+  opacity: 1; 
+}
+
+/* Internet Explorer 10-11 */
+.search-input:-ms-input-placeholder {
+  color: grey;
+}
+
+/* Microsoft Edge */
+.search-input::-ms-input-placeholder {
+  color: grey;
+}
 
 
 #oben {
@@ -50,8 +67,9 @@ body, html {
 
 
 h1{
-  font-size:60px!important;
-  text-shadow: black 2px 2px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:70px!important;
+  text-shadow: black 1px 1px;
 }
 
 
@@ -106,6 +124,17 @@ ul{
   height: 32px; /* Adjust as needed */
 }
 
+.tertia{
+  background-color: #0052BA!important;
+  
+}
+
+.btn:hover{
+  background-color: #0052BA!important;
+  outline: #0052BA;
+  color:white!important;
+  
+}
 
 .container {
     display: flex;
@@ -134,7 +163,7 @@ ul{
   
   z-index: 10; /* Ensure it's above other content */
   border:1px solid #ccc;
-  border-radius:12px;
+  border-radius:0.25rem;
 }
 
 .filter-group {
@@ -168,11 +197,15 @@ ul{
     border: 1px solid #ccc;
     margin-bottom: 1em;
     padding: 1em;
-    border-radius: 12px;
+    border-radius: 0.25rem;
     width:100%;
     min-height:200px;
     
 }
+
+.course-card:hover{
+  outline: 2px solid #0052BA;}
+  
 
 .card-text {
   white-space: nowrap; /* Prevents text from wrapping to the next line */
@@ -221,7 +254,7 @@ ul{
     bottom: 0;
     background-color: #ccc;
     transition: .4s;
-    border-radius: 12px;
+    border-radius: 0.25rem;
   }
   
   .slider:before {
@@ -237,7 +270,7 @@ ul{
   }
   
   input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #0052BA;
   }
   
   input:focus + .slider {
@@ -262,12 +295,21 @@ ul{
     grid-template-rows: repeat(2, auto);
     grid-template-columns: repeat(5, auto);
     padding: 20px 0 20px 1em;
+    margin-top: -120px;
+    margin-bottom:30px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
   }
 
+  .weiß{
+    background-color: white!important;
+    color:black!important;
+  }
+
   .selected {
-    background-color:#6c757d!important;
+    background-color:#0052BA!important;
     color:white!important;
+    outline: #0052BA!important;
   }
 
 @media (max-width: 768px) {

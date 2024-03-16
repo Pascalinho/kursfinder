@@ -250,14 +250,14 @@ function filterAndDisplayCourses() {
     }
     
         content.innerHTML = `
-            <p>Starttermine: <strong>${formattedStartDates}</strong>${moreDatesAvailable ? ' <span class="toggle-dates">+ weitere Termine</span>' : ''}</p>
+            <p>Starttermine: <strong style="color:#0052BA;">${formattedStartDates}</strong>${moreDatesAvailable ? ' <span class="toggle-dates">+ weitere Termine</span>' : ''}</p>
             <h3 class="card-text">${record["Kursname"]} <span style="font-size: 16px;">${iconHtml}</span></h3>
             <div style="display:flex; gap:20px; padding-top:10px;">
                 <p><i class="fas fa-clock"></i> ${record["Vollzeit/Teilzeit"]}</p>
                 <p><i class="fas fa-book"></i> ${record["Maßnahme"]}</p>
                 <p><i class="fas fa-coins"></i> ${record["Finanzierung"]}</p>
             </div>
-            <button type="button" class="btn btn-secondary details-btn" onclick="window.open('${detailUrl}', '_blank')">Details</button>
+            <button type="button" class="btn  btn-secondary details-btn" onclick="window.open('${detailUrl}', '_blank')">Details</button>
         `;
     
         if (moreDatesAvailable) {
