@@ -24,7 +24,7 @@ body, html {
   padding-left: 50px; /* Adjust as needed to accommodate the icon */
   width: 100%; /* Make input take full width of its container */
   padding: 20px 20px 20px 50px; /* Adjust left padding to accommodate icon */
-  border-radius: 20px;
+  border-radius: 12px;
   border: 1px solid black;
   font-size: 24px;
 }
@@ -134,7 +134,7 @@ ul{
   
   z-index: 10; /* Ensure it's above other content */
   border:1px solid #ccc;
-  border-radius:4px;
+  border-radius:12px;
 }
 
 .filter-group {
@@ -168,7 +168,7 @@ ul{
     border: 1px solid #ccc;
     margin-bottom: 1em;
     padding: 1em;
-    border-radius: 4px;
+    border-radius: 12px;
     width:100%;
     min-height:200px;
     
@@ -221,7 +221,7 @@ ul{
     bottom: 0;
     background-color: #ccc;
     transition: .4s;
-    border-radius: 16px;
+    border-radius: 12px;
   }
   
   .slider:before {
