@@ -74,7 +74,7 @@ h1{
 
 
 h3 {
-    font-size:18px;
+    font-size:24px!important;
 }
 
 #current
@@ -129,6 +129,12 @@ ul{
   
 }
 
+.btn{
+  padding: 10px 20px!important;
+  border-radius: 2px!important;
+  border:none!important;
+}
+
 .btn:hover{
   background-color: #0052BA!important;
   outline: #0052BA;
@@ -147,11 +153,13 @@ ul{
 
 .filter-sidebar {
   flex: 0 0 300px; /* flex-grow | flex-shrink | flex-basis */
-  border-right: 1px solid #ccc;
-  padding-right: 1em;
-  padding-left:1em;
+  
+  padding: 1em;
   box-sizing: border-box;
   overflow-y: auto;
+  background-color: #edeff1;
+  box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
 }
 
 #contactInfo {
@@ -193,14 +201,23 @@ ul{
   font-size:22px!important;
 }
 
+.termine{
+  display: inline-block;
+  border-radius:5px;
+  background-color: white;
+  padding: 3px 15px 5px 15px;
+  margin-bottom: 1rem;
+}
+
 .course-card {
-    border: 1px solid #ccc;
+    
     margin-bottom: 1em;
-    padding: 1em;
-    border-radius: 0.25rem;
+    padding: 2em;
+    border-radius: 15px;
     width:100%;
     min-height:200px;
-    
+    background-color: #E1EBF7;
+    box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);
 }
 
 .course-card:hover{
@@ -219,6 +236,7 @@ ul{
   overflow: hidden; /* Ensures that any overflow text is hidden */
   text-overflow: ellipsis; /* Adds an ellipsis (...) at the end of the text if it overflows */
   max-width:700px;
+  padding: 5px 5px 5px 0px;
 }
 
 

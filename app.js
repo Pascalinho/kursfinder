@@ -250,14 +250,14 @@ function filterAndDisplayCourses() {
     }
     
         content.innerHTML = `
-            <p>Starttermine: <strong style="color:#0052BA;">${formattedStartDates}</strong>${moreDatesAvailable ? ' <span class="toggle-dates">+ weitere Termine</span>' : ''}</p>
+            <div class="termine"><strong style="color:#0052BA;">${formattedStartDates}${moreDatesAvailable ? ' <span class="toggle-dates">+ weitere Termine</span>' : ''}</strong></div>
             <h3 class="card-text">${record["Kursname"]} <span style="font-size: 16px;">${iconHtml}</span></h3>
             <div style="display:flex; gap:20px; padding-top:10px;">
                 <p><i class="fas fa-clock"></i> ${record["Vollzeit/Teilzeit"]}</p>
                 <p><i class="fas fa-book"></i> ${record["Maßnahme"]}</p>
                 <p><i class="fas fa-coins"></i> ${record["Finanzierung"]}</p>
             </div>
-            <button type="button" class="btn  btn-secondary details-btn" onclick="window.open('${detailUrl}', '_blank')">Details</button>
+            <button type="button" class="btn tertia btn-secondary details-btn" onclick="window.open('${detailUrl}', '_blank')">Mehr erfahren</button>
         `;
     
         if (moreDatesAvailable) {
@@ -270,7 +270,8 @@ function filterAndDisplayCourses() {
     
 
     function toggleDates(content, record, allDates) {
-        const datesDisplay = content.querySelector('p > strong');
+        const datesDisplay = content.querySelector('.termine > strong');
+
         const toggleSpan = content.querySelector('.toggle-dates');
 
         if (toggleSpan.textContent.includes('weitere')) {
