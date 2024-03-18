@@ -319,8 +319,8 @@ ul{
     grid-gap: 5px;
     grid-template-rows: repeat(2, auto);
     grid-template-columns: repeat(5, auto);
-    padding: 20px 0 20px 1em;
-    margin-top: -120px;
+    padding: 20px 0 20px 0;
+    margin-top: -130px;
     margin-bottom:30px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
