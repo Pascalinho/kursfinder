@@ -176,7 +176,7 @@ function filterAndDisplayCourses() {
 
     function updateCourseCounts(total, filtered) {
         const countsContainer = document.getElementById('countsContainer');
-        countsContainer.innerHTML = `Alle: ${total} <br> Angezeigt: <strong>${filtered}</strong>`;
+        countsContainer.innerHTML = `Gesamt: ${total} &nbsp;&nbsp; Angezeigt: <strong>${filtered}</strong>`;
     }
 
     function sortAndDisplayCourses(records) {
@@ -249,16 +249,37 @@ function filterAndDisplayCourses() {
         iconHtml = '<i class="fas fa-laptop"></i>'; // Icon for online
     }
     
-        content.innerHTML = `
-            <div class="termine"><strong style="color:#0052BA;">${formattedStartDates}${moreDatesAvailable ? ' <span class="toggle-dates">+ weitere Termine</span>' : ''}</strong></div>
-            <h3 class="card-text">${record["Kursname"]} <span style="font-size: 16px;">${iconHtml}</span></h3>
-            <div style="display:flex; gap:20px; padding-top:10px;">
-                <p><i class="fas fa-clock"></i> ${record["Vollzeit/Teilzeit"]}</p>
-                <p><i class="fas fa-book"></i> ${record["Maßnahme"]}</p>
-                <p><i class="fas fa-coins"></i> ${record["Finanzierung"]}</p>
-            </div>
-            <button type="button" class="btn tertia btn-secondary details-btn" onclick="window.open('${detailUrl}', '_blank')">Mehr erfahren</button>
-        `;
+    content.innerHTML = `
+    <div class="termine">
+        <div class="dates-and-toggle">
+            <div class="dates-container"></div>
+            ${moreDatesAvailable ? '<span class="toggle-dates">+ weitere Termine</span>' : ''}
+        </div>
+    </div>
+    <h3 class="card-text">${record["Kursname"]} <span style="font-size: 16px;">${iconHtml}</span></h3>
+    <div style="display:flex; gap:10px;">
+        <p><i class="fas fa-clock"></i> ${record["Vollzeit/Teilzeit"]}</p>
+        <p><i class="fas fa-book"></i> ${record["Maßnahme"]}</p>
+        <p><i class="fas fa-coins"></i> ${record["Finanzierung"]}</p>
+    </div>
+    <button type="button" class="btn tertia btn-secondary details-btn" onclick="window.open('${detailUrl}', '_blank')">Mehr erfahren</button>
+`;
+
+// Populate the dates container
+const datesContainer = content.querySelector('.dates-container');
+if (hasNachAbsprache) {
+    const dateDiv = document.createElement('div');
+    dateDiv.className = 'date-box'; 
+    dateDiv.textContent = "Nach Absprache";
+    datesContainer.appendChild(dateDiv);
+} else {
+    initialDates.forEach(dateStr => {
+        const dateDiv = document.createElement('div');
+        dateDiv.textContent = formatDate(dateStr);
+        dateDiv.className = 'date-box'; // Assign class name
+        datesContainer.appendChild(dateDiv);
+    });
+}
     
         if (moreDatesAvailable) {
             const toggleDatesSpan = content.querySelector('.toggle-dates');
@@ -270,21 +291,22 @@ function filterAndDisplayCourses() {
     
 
     function toggleDates(content, record, allDates) {
-        const datesDisplay = content.querySelector('.termine > strong');
-
-        const toggleSpan = content.querySelector('.toggle-dates');
-
-        if (toggleSpan.textContent.includes('weitere')) {
-            // Show all dates
-            datesDisplay.textContent = allDates.map(dateStr => formatDate(dateStr)).join(', ');
-            toggleSpan.textContent = '- weniger anzeigen';
-        } else {
-            // Show initial dates
-            const initialDates = allDates.slice(0, 3);
-            datesDisplay.textContent = initialDates.map(dateStr => formatDate(dateStr)).join(', ');
-            toggleSpan.textContent = '+ weitere Termine';
-        }
+        const datesContainer = content.querySelector('.dates-container');
+        const toggleSpan = content.querySelector('.toggle-dates'); // Correctly define toggleSpan here
+    
+        datesContainer.innerHTML = ''; // Clear existing dates
+    
+        const newDates = toggleSpan.textContent.includes('weitere') ? allDates : allDates.slice(0, 3);
+        newDates.forEach(dateStr => {
+            const dateDiv = document.createElement('div');
+            dateDiv.textContent = formatDate(dateStr);
+            dateDiv.className = 'date-box'; // Assign class name
+            datesContainer.appendChild(dateDiv);
+        });
+    
+        toggleSpan.textContent = toggleSpan.textContent.includes('weitere') ? '- weniger anzeigen' : '+ weitere Termine';
     }
+    
 
     function formatDate(dateStr) {
         const [day, month, year] = dateStr.split('.').map(Number);
@@ -353,6 +375,4 @@ function attachButtonEventListeners() {
     });
 }
 
-document.getElementById('sidebarToggle').addEventListener('click', function() {
-    document.querySelector('.filter-sidebar').classList.toggle('active');
-});
+

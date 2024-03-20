@@ -25,7 +25,7 @@ body, html {
   padding-left: 50px; /* Adjust as needed to accommodate the icon */
   width: 100%; /* Make input take full width of its container */
   padding: 5px 5px 5px 80px; /* Adjust left padding to accommodate icon */
-  border-radius: 0.25rem;
+  border-radius: 15px;
   border: 1px solid #ccc;
   font-size: 24px;
   color:black;
@@ -126,12 +126,13 @@ ul{
 
 .tertia{
   background-color: #0052BA!important;
+  border-radius:15px!important;
   
 }
 
 .btn{
   padding: 10px 20px!important;
-  border-radius: 2px!important;
+  border-radius: 15px!important;
   border:none!important;
 }
 
@@ -159,7 +160,7 @@ ul{
   overflow-y: auto;
   background-color: #edeff1;
   box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 #contactInfo {
@@ -171,7 +172,7 @@ ul{
   
   z-index: 10; /* Ensure it's above other content */
   border:1px solid #ccc;
-  border-radius:0.25rem;
+  border-radius: 15px;
 }
 
 .filter-group {
@@ -191,9 +192,9 @@ ul{
   display: flex;
   flex-direction: column; /* Ensures cards are stacked vertically */
   width: 100%;
-  padding-top:1em;
-  padding-left:1em;
-    
+  
+  padding-left:2em;
+  
 }
 
 #kursname
@@ -201,17 +202,10 @@ ul{
   font-size:22px!important;
 }
 
-.termine{
-  display: inline-block;
-  border-radius:5px;
-  background-color: white;
-  padding: 3px 15px 5px 15px;
-  margin-bottom: 1rem;
-}
 
 .course-card {
     
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     padding: 2em;
     border-radius: 15px;
     width:100%;
@@ -336,6 +330,58 @@ ul{
     color:white!important;
     outline: #0052BA!important;
   }
+
+  .dates-container {
+    display: flex; /* This makes all child elements line up horizontally */
+    flex-wrap: wrap; /* Allows the dates to wrap to next line if container is too small */
+    gap: 5px; /* Adds space between the date boxes */
+    align-items: center; /* Aligns items vertically in the center */
+    margin-bottom:5px;
+}
+
+.date-box {
+    background-color: white; /* Sets the background color of each date box */
+    padding: 5px 10px; /* Adds some padding inside each date box */
+    
+    border-radius: 15px; /* Optional: adds rounded corners to the boxes */
+    font-weight: bold;
+}
+
+.termine > strong {
+    display: flex; /* Aligns the dates and the toggle inline */
+    align-items: center; /* Ensures vertical alignment */
+    flex-wrap: wrap; /* Allows items to wrap */
+
+}
+
+.custom-switch-adjust {
+  display: flex!important;
+  align-items: start; /* Align items vertically */
+  padding-left:0!important;
+}
+
+.custom-switch-adjust .form-check-input {
+  margin-left: 1rem!important; /* Add space after the label (before the input visually) */
+  margin-right: 0; /* Reset right margin */
+}
+
+
+
+
+.toggle-dates {
+    margin-left: 10px; /* Adds space between the last date box and the toggle */
+    cursor: pointer; /* Changes the mouse cursor to indicate clicking is possible */
+}
+
+.dates-and-toggle {
+  display: flex; /* Ensures dates and toggle text are inline */
+  align-items: center; /* Centers items vertically */
+  flex-wrap: wrap; /* Allows items to wrap if needed */
+  color: #0052BA; /* Apply color here instead of inline */
+}
+
+
+
 
 @media (max-width: 768px) {
     .filter-sidebar {
