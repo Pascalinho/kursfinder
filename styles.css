@@ -159,7 +159,7 @@ ul{
   box-sizing: border-box;
   overflow-y: auto;
   background-color: #edeff1;
-  box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);
+  
   border-radius: 15px;
 }
 
@@ -211,7 +211,7 @@ ul{
     width:100%;
     min-height:200px;
     background-color: #E1EBF7;
-    box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);
+    
 }
 
 .course-card:hover{
