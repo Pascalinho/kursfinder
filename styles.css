@@ -206,7 +206,7 @@ ul{
 .course-card {
     
     margin-bottom: 2em;
-    padding: 2em;
+    padding: 1.5em;
     border-radius: 15px;
     width:100%;
     min-height:200px;
@@ -308,16 +308,25 @@ ul{
   .button-container {
     max-width:1080px;
     margin:auto;
-    display:grid;
+    display: grid;
     grid-gap: 5px;
     grid-template-rows: repeat(2, auto);
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(5, 1fr);
     padding: 20px 0 20px 0;
     margin-top: -130px;
     margin-bottom:30px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
   }
+  .button-container .btn {
+    min-width: 150px; /* Adjust based on your design needs */
+    height: 40px; /* Adjust based on your design needs */
+    white-space: normal; /* Ensures text wraps correctly */
+    text-align: center; /* Center the text */
+    padding: 5px 10px; /* Adjust based on your design needs, maintains padding */
+}
+
+  
 
   .weiß{
     background-color: white!important;
@@ -380,6 +389,14 @@ ul{
 }
 
 
+.filter-sidebar .input-group-text {
+  background-color: white; /* Set the background to transparent */
+  
+}
+
+
+.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-control, .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-select, .input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+  border-right: none;}
 
 
 @media (max-width: 768px) {

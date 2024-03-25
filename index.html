@@ -43,10 +43,7 @@
       <div id="oben">
           <div id="top">
             <h1 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Tertia Kursfinder</h1>
-            <div class="search-container1">
-              <img src="search.png" class="search-icon">
-              <input type="text" class="search-input" id="suche" placeholder="Nach Kursen suchen...">
-          </div>  
+            
         </div>
       </div>
       <div class="button-container">
@@ -75,24 +72,20 @@
               <input class="form-check-input" type="checkbox" role="switch" id="bildungsgutscheinToggle">
           </div>
             
-            <div>
-              <label for="exampleFormControlInput1" class="form-label">Sortierung</label>
-              <select class="form-select" aria-label="Default select example"  id="sortingOption" >
-                <option value="date" selected>Datum</option>
-                <option value="az">A - Z</option>
-                <option value="za">Z - A</option>                
-              </select>
-          </div>
+            
           
         
-<!--
-              <div>
-                <label for="exampleFormControlInput1" class="form-label">Stichwortsuche</label>
-                
-              </div>-->
 
               <div>
-                <label for="exampleFormControlInput1" class="form-label">Standort wählen</label>
+                <label for="suche" class="form-label">Kurssuche</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="suche" placeholder="Nach Kursen suchen...">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+              </div>
+
+              <div>
+                <label for="exampleFormControlInput1" class="form-label">Standort</label>
                 <select class="form-select" id="locationSelect">
                   <option id="Alle Standorte"selected>Alle Standorte</option>
                   <option value="Aachen">Aachen</option>
@@ -100,12 +93,12 @@
                 </select>
               </div>
               <div>
-                <label for="exampleFormControlInput1" class="form-label">Frühestes Startdatum</label>
+                <label for="exampleFormControlInput1" class="form-label">Startdatum</label>
                 <input type="date" class="form-control" id="earliestStartDate">
               </div>
               
               
-              <div><label class="form-label">Art der Maßnahme</label><div>
+              <div><label class="form-label">Maßnahme</label><div>
                 
                 <div class="form-check">
                   <input class="form-check-input measure-checkbox" type="checkbox" value="Coaching" id="coachingCheckbox">
@@ -173,6 +166,23 @@
                   </label>
               </div>
           </div>
+
+          <div>
+            <label class="form-label">Form</label>
+            <div class="form-check">
+                <input class="form-check-input form-checkbox" type="checkbox" value="Einzel" id="einzelCheckbox">
+                <label style="font-weight:normal;" class="form-check-label" for="einzelCheckbox">
+                    Einzel
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input form-checkbox" type="checkbox" value="Gruppe" id="gruppeCheckbox">
+                <label style="font-weight:normal;" class="form-check-label" for="gruppeCheckbox">
+                    Gruppe
+                </label>
+            </div>
+        </div>
+        
 
             <button type="button" class="btn tertia btn-success" id="resetFilters">Filter zurücksetzen</button>
           

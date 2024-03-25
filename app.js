@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => console.error('Error fetching contact info:', error));
 
 
+        document.querySelectorAll('.form-checkbox').forEach(input => {
+            input.addEventListener('change', filterAndDisplayCourses);
+        });
+           
     document.getElementById('suche').addEventListener('input', filterAndDisplayCourses);
     document.getElementById('bildungsgutscheinToggle').addEventListener('change', filterAndDisplayCourses);
 
@@ -49,9 +53,6 @@ function attachButtonEventListeners() {
     });
 }
 
-document.getElementById('sortingOption').addEventListener('change', function() {
-    filterAndDisplayCourses(); // This will now consider the current sorting option
-});
 
 
 document.querySelectorAll('.measure-checkbox, .attendance-checkbox, #earliestStartDate').forEach(input => {
@@ -89,7 +90,8 @@ function resetFilters() {
     document.getElementById('suche').value = '';
     document.getElementById('bildungsgutscheinToggle').checked = false;
     document.getElementById('earliestStartDate').value = '';
-    document.getElementById('sortingOption').value = 'date'
+    document.getElementById('einzelCheckbox').checked = false;
+    document.getElementById('gruppeCheckbox').checked = false;
 
     // Reset all checkboxes for both groups
     document.querySelectorAll('.measure-checkbox, .attendance-checkbox').forEach(checkbox => {
@@ -125,7 +127,12 @@ function filterAndDisplayCourses() {
     const bildungsgutscheinToggle = document.getElementById('bildungsgutscheinToggle').checked;
     const earliestStartDate = document.getElementById('earliestStartDate').value;
     const currentDate = new Date();
-    const selectedLocation = document.getElementById('locationSelect').value; // Get the selected location from the dropdown
+    const selectedLocation = document.getElementById('locationSelect').value;
+    
+const formTypes = [];
+if (document.getElementById('einzelCheckbox').checked) formTypes.push('Einzel');
+if (document.getElementById('gruppeCheckbox').checked) formTypes.push('Gruppe');
+
 
     // Define your arrays for filtering based on checkboxes
     const artTypes = [];
@@ -144,8 +151,9 @@ function filterAndDisplayCourses() {
     // Now filter the globalRecords based on the selected filters
     const filteredRecords = globalRecords.filter(record => {
         const matchesSearch = record["Kursname"].toLowerCase().includes(searchQuery);
-        const matchesBildungsgutschein = !bildungsgutscheinToggle || record["Bildungsgutschein"] === "true";
+        const matchesBildungsgutschein = !bildungsgutscheinToggle || record["Bildungsgutschein"] === "TRUE";
         const matchesCategory = selectedCategory === "Alle Berufsgruppen" || record["Category"] === selectedCategory;
+        const matchesForm = formTypes.length === 0 || formTypes.includes(record["Form"]);
 
         // Added: Location filter logic
         const matchesLocation = selectedLocation === "Alle Standorte" || record["Standort"].includes(selectedLocation);
@@ -164,7 +172,7 @@ function filterAndDisplayCourses() {
         const matchesAttendanceType = attendanceTypes.length === 0 || attendanceTypes.some(type => record["Vollzeit/Teilzeit"].includes(type));
         const matchesArt = artTypes.length === 0 || artTypes.includes(record["Art"]);
 
-        return matchesSearch && matchesBildungsgutschein && matchesCategory && matchesLocation && matchesStartDate && matchesMeasure && matchesAttendanceType && matchesArt;
+        return matchesSearch && matchesBildungsgutschein && matchesCategory && matchesLocation && matchesStartDate && matchesMeasure && matchesAttendanceType && matchesArt && matchesForm;
     });
 
     sortAndDisplayCourses(filteredRecords);
@@ -180,17 +188,8 @@ function filterAndDisplayCourses() {
     }
 
     function sortAndDisplayCourses(records) {
-        const sortingOption = document.getElementById('sortingOption').value;
-    
-        if (sortingOption === "az") {
-            records.sort((a, b) => a["Kursname"].localeCompare(b["Kursname"], 'de-DE'));
-        } else if (sortingOption === "za") {
-            records.sort((a, b) => b["Kursname"].localeCompare(a["Kursname"], 'de-DE'));
-        } else {
-            // Default to sorting by date
-            records.sort((a, b) => compareDatesAndNames(a, b));
-        }
-        
+        // Always sort by date; we don't need to check for sorting options anymore
+        records.sort((a, b) => compareDatesAndNames(a, b));
         displayCourses(records);
     }
     
@@ -311,12 +310,16 @@ if (hasNachAbsprache) {
     function formatDate(dateStr) {
         const [day, month, year] = dateStr.split('.').map(Number);
         const date = new Date(year, month - 1, day);
-        return date.toLocaleDateString('de-DE', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+    
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        const localeDateString = date.toLocaleDateString('de-DE', options);
+    
+        // Replace the period after the month abbreviation if it exists (since 'toLocaleDateString' might include it)
+        return localeDateString.replace('.', '');
     }
+    
+    
+    
     function compareDatesAndNames(a, b) {
         const currentDate = new Date();
         currentDate.setHours(0, 0, 0, 0); // Normalize current date to start of day for comparison
@@ -374,5 +377,4 @@ function attachButtonEventListeners() {
         });
     });
 }
-
 
