@@ -374,7 +374,17 @@ function attachButtonEventListeners() {
             selectedCategory = this.textContent;
             // Re-filter and display courses with all current criteria
             filterAndDisplayCourses();
+       
+       
+       
+       
         });
+    
+    
+    
     });
+
+
+    
 }
 
